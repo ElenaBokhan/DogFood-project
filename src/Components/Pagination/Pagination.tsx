@@ -11,6 +11,8 @@ interface IPaginationProps {
 
 const PER_PAGE = 16;
 const PAGINATION_PAGE_AMOUNT = 5;
+const FIRST_INDEX_PAGE = 1;
+const MIDDLE_INDEX_PAGE = Math.floor(PAGINATION_PAGE_AMOUNT / 2);
 
 enum EArrow {
     LEFT,
@@ -28,10 +30,9 @@ export const Pagination = ({currentPage, onChange, total}: IPaginationProps) => 
         onChange(currentPage + 1);
     };
 
-    // пока неясно что с ней делать и как оно должно работать, позже..
-    // const handleDotsPage = (page: number) => {
-    //     onChange(page + 1);
-    // };
+    const handleDotsPage = () => {
+        onChange(lastIndexPage > PAGINATION_PAGE_AMOUNT ? currentPage + 1 : currentPage - 1);
+    };
 
     const renderArrowButton = (arrow: EArrow) => {
         const {disable, icon, label, onChange} =
@@ -55,15 +56,15 @@ export const Pagination = ({currentPage, onChange, total}: IPaginationProps) => 
         let startIndexPage;
         let endIndexPage;
 
-        if (currentPage < 3) {
-            startIndexPage = 1;
-            endIndexPage = 5;
-        } else if (currentPage >= lastIndexPage - 2) {
-            startIndexPage = lastIndexPage - 4;
+        if (currentPage <= MIDDLE_INDEX_PAGE) {
+            startIndexPage = FIRST_INDEX_PAGE;
+            endIndexPage = PAGINATION_PAGE_AMOUNT;
+        } else if (currentPage > lastIndexPage - MIDDLE_INDEX_PAGE) {
+            startIndexPage = lastIndexPage - PAGINATION_PAGE_AMOUNT + FIRST_INDEX_PAGE;
             endIndexPage = lastIndexPage;
         } else {
-            startIndexPage = currentPage - 2;
-            endIndexPage = currentPage + 2;
+            startIndexPage = currentPage - MIDDLE_INDEX_PAGE;
+            endIndexPage = currentPage + MIDDLE_INDEX_PAGE;
         }
 
         const dotsPage = '...';
@@ -73,14 +74,12 @@ export const Pagination = ({currentPage, onChange, total}: IPaginationProps) => 
         }
 
         if (lastIndexPage > PAGINATION_PAGE_AMOUNT) {
-            if (currentPage < lastIndexPage - 2) {
+            if (currentPage < lastIndexPage - MIDDLE_INDEX_PAGE) {
                 pageItems.push(dotsPage);
                 pageItems.push(lastIndexPage);
-            }
-
-            if (currentPage >= lastIndexPage - 2) {
+            } else {
                 pageItems.unshift(dotsPage);
-                pageItems.unshift(1);
+                pageItems.unshift(FIRST_INDEX_PAGE);
             }
         }
 
@@ -89,10 +88,9 @@ export const Pagination = ({currentPage, onChange, total}: IPaginationProps) => 
                 {pageItems.map((item, index) => (
                     <Button
                         className={item === currentPage && 'selected'}
-                        disable={item === dotsPage}
                         key={index}
                         label={item}
-                        onChange={onChange}
+                        onChange={item === dotsPage ? handleDotsPage : onChange}
                         type={EButtonType.PAGINATION}
                     />
                 ))}

@@ -59,7 +59,7 @@ export const Catalog = ({search}: ICatalogProps) => {
         };
 
         getProducts();
-    }, [search, currentPage]);
+    }, [search]);
 
     useEffect(() => {
         if (!products) return;
