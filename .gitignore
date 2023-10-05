@@ -1,0 +1,8 @@
+node_modules
+.idea/
+.vscode
+dist
+
+.env
+.env.test
+.env.deploy

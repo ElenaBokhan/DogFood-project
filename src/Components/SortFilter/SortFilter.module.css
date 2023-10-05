@@ -1,0 +1,19 @@
+.filter-panel {
+    display: flex;
+    padding: 12px 16px;
+    gap: 16px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px 0 rgb(96 97 112 / 16%), 0 2px 4px 0 rgb(40 41 61 / 4%);
+    width: 992px;
+}
+
+.filter-item {
+    border: none;
+    font-size: 14px;
+    color: #7b8e98;
+    background: none;
+}
+
+.selected {
+    color: black;
+}

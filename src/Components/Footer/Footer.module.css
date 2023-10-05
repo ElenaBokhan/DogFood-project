@@ -1,0 +1,40 @@
+.footer {
+    height: 194px;
+    display: flex;
+    padding: 40px 0;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer ul {
+    list-style-type: none;
+}
+
+.footer ul li {
+    line-height: 32px;
+}
+
+.footer ul li:hover {
+    font-weight: bold;
+}
+
+.logo-block {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+}
+
+.contacts {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 168px;
+    justify-content: space-between;
+}
+
+.social {
+    display: flex;
+    justify-content: space-between;
+    justify-self: flex-end;
+}

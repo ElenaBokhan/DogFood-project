@@ -1,0 +1,19 @@
+.header {
+    display: flex;
+    padding: 12px 0;
+    align-items: center;
+    gap: 80px;
+    height: 80px;
+}
+
+.logo {
+    width: 224px;
+    height: 56px;
+    flex-shrink: 0;
+}
+
+.profiles-icons {
+    display: flex;
+    width: 140px;
+    justify-content: space-between;
+}

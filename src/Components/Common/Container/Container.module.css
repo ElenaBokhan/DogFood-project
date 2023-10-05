@@ -1,0 +1,20 @@
+.container {
+    max-width: 992px;
+    margin: 0 auto;
+    height: 100%;
+}
+
+.header-container {
+    flex: 0 0 auto;
+    background: #ffe44d;
+}
+
+.main-container {
+    flex: 1 0 auto;
+    position: relative;
+}
+
+.footer-container {
+    flex: 0 0 auto;
+    background: #ffe44d;
+}

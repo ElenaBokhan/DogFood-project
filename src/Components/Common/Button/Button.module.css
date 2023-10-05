@@ -1,0 +1,53 @@
+.button {
+    padding: 10px 18px;
+    font-size: 16px;
+    border-radius: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.standard:hover {
+    background: #ffee96;
+    border: none;
+}
+
+.standard {
+    background: #ffe44d;
+    border: none;
+}
+
+.redirect {
+    background: none;
+    border: 1px solid #cfd8dc;
+    display: flex;
+    line-height: 15px;
+}
+
+.redirect:hover {
+    background: #ffee96;
+    border: 1px solid #ffee96;
+}
+
+.pagination {
+    width: 48px;
+    height: 48px;
+    padding: 14px;
+    background: none;
+    border: 1px solid #cfd8dc;
+}
+
+.pagination:hover {
+    border: 1px solid #ffee96;
+    background: #ffee96;
+}
+
+.selected {
+    border: none;
+    background: #ffe44d;
+}
+
+.selected:hover {
+    background: #ffe44d;
+}

@@ -1,0 +1,16 @@
+{
+    "extends": "stylelint-config-standard",
+    "ignoreFiles": ["dist"],
+    "rules": {
+        "indentation": 4,
+        "selector-pseudo-class-no-unknown": [
+            true,
+            {
+                "ignorePseudoClasses": ["global"]
+            }
+        ],
+        "string-quotes": "single",
+        "no-descending-specificity": null,
+        "property-no-unknown": true
+    }
+}
