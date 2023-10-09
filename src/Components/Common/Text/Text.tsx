@@ -5,13 +5,13 @@ import React from 'react';
 interface ITextProps {
     className?: string;
     fontColor?: EFontColor;
-    size?: ETextSize;
-    type?: EFontType;
+    type?: ETextType;
+    weight?: EFontWeight;
     value?: string | number;
     children?: React.ReactNode;
 }
 
-export enum EFontType {
+export enum EFontWeight {
     GENERAL = 'bold',
     SECONDARY = 'normal',
 }
@@ -20,29 +20,33 @@ export enum EFontColor {
     RED = 'red',
     BLACK = 'black',
     GREY = 'grey',
+    YELLOW = 'yellow',
 }
 
-export enum ETextSize {
-    S14 = 'size14',
-    S20 = 'size20',
-    S28 = 'size28',
-    S9 = 'size9',
-    S12 = 'size12',
-    S16 = 'size16',
+export enum ETextType {
+    H0 = 'head0',
+    H1 = 'head1',
+    H2 = 'head2',
+    H3 = 'head3',
+    P1 = 'paragraph1',
+    P2 = 'paragraph2',
+    S1 = 'subscribe1',
+    S2 = 'subscribe2',
+    EXTRA = 'extra',
 }
 
 export const Text = ({
     children,
     fontColor = EFontColor.BLACK,
-    size = ETextSize.S20,
-    type = EFontType.SECONDARY,
+    type = ETextType.P1,
     value,
+    weight,
     className,
 }: ITextProps) => {
     return (
-        <p className={cn(className, styles[fontColor], styles[size], styles[type])}>
+        <span className={cn(className, styles[fontColor], styles[weight], styles[type])}>
             {value}
             {children}
-        </p>
+        </span>
     );
 };

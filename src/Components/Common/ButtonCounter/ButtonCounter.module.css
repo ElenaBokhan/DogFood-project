@@ -1,0 +1,15 @@
+.button-conteiner {
+    display: flex;
+    padding: 12px 18px;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid #cfd8dc;
+    border-radius: 55px;
+
+}
+
+.button-conteiner button {
+    background: none;
+    border: none;
+}

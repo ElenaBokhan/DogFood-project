@@ -1,0 +1,13 @@
+.not-found {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    justify-content: center;
+    gap: 1em;
+}
+
+.heart::after {
+    /* TODO: разобраться с кодом символа */
+    content: ' ❤️️';
+}

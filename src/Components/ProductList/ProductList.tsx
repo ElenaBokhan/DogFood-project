@@ -1,5 +1,5 @@
-import {IProduct, ProductItem} from 'Components/ProductItem/ProductItem';
-import style from 'Pages/ProductList/ProductList.module.css';
+import {ProductItem} from 'Components/ProductItem/ProductItem';
+import style from 'Components/ProductList/ProductList.module.css';
 
 interface IProductListProps {
     products: IProduct[];

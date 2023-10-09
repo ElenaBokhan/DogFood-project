@@ -1,0 +1,8 @@
+.breadcrumbs {
+    align-items: center;
+    display: flex;
+}
+
+.link {
+    text-decoration: none;
+}
