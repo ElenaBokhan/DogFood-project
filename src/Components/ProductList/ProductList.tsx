@@ -8,8 +8,8 @@ interface IProductListProps {
 export const ProductList = ({products}: IProductListProps) => {
     return (
         <div className={style.productList}>
-            {products?.map((product, index) => (
-                <ProductItem key={index} product={product} />
+            {products?.map((product) => (
+                <ProductItem key={product._id} product={product} />
             ))}
         </div>
     );

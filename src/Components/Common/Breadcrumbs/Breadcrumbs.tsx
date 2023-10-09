@@ -11,7 +11,7 @@ export const Breadcrumbs = ({pathName = '/'}: IBreadcrumbs) => {
     return (
         <Link className={styles.link} to={pathName}>
             <div className={styles.breadcrumbs}>
-                <img src={bcLeftArrow} />
+                <img src={bcLeftArrow} alt='bcLeftArrow' />
                 <Text fontColor={EFontColor.GREY} type={ETextType.S2} value={'Назад'} />
             </div>
         </Link>

@@ -1,7 +1,7 @@
 import api from 'api/api';
 import {PER_PAGE} from 'Const';
 import {ESortFilter} from 'Pages/Catalog/Catalog';
-import React, {createContext, useCallback, useEffect, useState} from 'react';
+import React, {createContext, useCallback, useEffect, useMemo, useState} from 'react';
 
 interface IProps {
     children: React.ReactNode;
@@ -77,20 +77,19 @@ export const ProductsProvider: React.FC<IProps> = ({children}: IProps) => {
         setSortFilter(newFilter as ESortFilter);
     }, []);
 
-    return (
-        <ProductsContext.Provider
-            value={{
-                handleSearch,
-                handleChangePage,
-                handleChangeSort,
-                productsList,
-                search,
-                isLoading,
-                currentPage,
-                sortFilter,
-            }}
-        >
-            {children}
-        </ProductsContext.Provider>
+    const productValue = useMemo(
+        () => ({
+            handleSearch,
+            handleChangePage,
+            handleChangeSort,
+            productsList,
+            search,
+            isLoading,
+            currentPage,
+            sortFilter,
+        }),
+        [search, isLoading, currentPage, sortFilter]
     );
+
+    return <ProductsContext.Provider value={productValue}>{children}</ProductsContext.Provider>;
 };

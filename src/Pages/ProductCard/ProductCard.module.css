@@ -3,7 +3,6 @@
     flex-direction: column;
 }
 
-
 .product-main {
     display: flex;
     gap: 40px;
@@ -62,11 +61,9 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-
 }
 
 .price-conteiner {
     position: relative;
     padding-top: 16px;
-
 }

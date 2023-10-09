@@ -42,7 +42,7 @@ export const Pagination = ({currentPage, onChange, total}: IPaginationProps) => 
 
         const labelButton = (
             <>
-                <img src={icon} />
+                <img src={icon} alt='arrowIcon' />
                 <span>{label}</span>
             </>
         );
@@ -85,10 +85,10 @@ export const Pagination = ({currentPage, onChange, total}: IPaginationProps) => 
 
         return (
             <div className={styles.paginationItems}>
-                {pageItems.map((item, index) => (
+                {pageItems.map((item) => (
                     <Button
                         className={item === currentPage && 'selected'}
-                        key={index}
+                        key={item.toString()}
                         label={item}
                         onChange={item === dotsPage ? handleDotsPage : onChange}
                         type={EButtonType.PAGINATION}

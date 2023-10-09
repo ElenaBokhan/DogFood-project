@@ -6,13 +6,14 @@ import {ProductItem} from 'Components/ProductItem/ProductItem';
 import style from 'Pages/Favourites/Favourites.module.css';
 
 export const Favourites = () => {
+    // TODO: разобраться с получением списка(локальный только?)
     const products: IProduct[] = [];
 
     const renderButton = () => {
         const labelButton = (
             <>
                 <span>{'Показать еще'}</span>
-                <img src={arrowDown} />
+                <img src={arrowDown} alt="arrowDown" />
             </>
         );
 
@@ -23,8 +24,8 @@ export const Favourites = () => {
             <TitlePage label={'Избранное'} />
             {products.length > 0 ? (
                 <>
-                    {products.map((product, index) => (
-                        <ProductItem key={index} product={product} />
+                    {products.map((product) => (
+                        <ProductItem key={product._id} product={product} />
                     ))}
                     {renderButton()}
                 </>

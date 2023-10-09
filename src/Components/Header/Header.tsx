@@ -15,7 +15,7 @@ export const Header = () => {
     const renderLogo = () => {
         return (
             <div className={styles.logo}>
-                <img src={Logo} />
+                <img src={Logo} alt='headerLogo' />
             </div>
         );
     };
@@ -29,9 +29,9 @@ export const Header = () => {
 
         return (
             <div className={styles.profilesIcons}>
-                {headerIconConfig.map(({name, path}, index) => (
-                    <Link key={index} state={state} to={path}>
-                        <img src={name} />
+                {headerIconConfig.map(({name, path}) => (
+                    <Link key={path} state={state} to={path}>
+                        <img src={name} alt='profileIcon' />
                     </Link>
                 ))}
             </div>

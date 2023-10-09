@@ -33,8 +33,7 @@ export const Layout = () => {
 
 export const loaderLayout = async () => {
     const getUser = async () => {
-        const user = await api.getUserInfo();
-        return user;
+        return await api.getUserInfo();
     };
 
     return {user: await getUser()};
