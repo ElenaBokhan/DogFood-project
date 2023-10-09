@@ -7,7 +7,7 @@ interface IButtonProps {
     disable?: boolean;
     label: string | number | React.ReactNode;
     onChange?: (page: number) => void;
-    type: EButtonType;
+    type?: EButtonType;
 }
 
 export enum EButtonType {
@@ -16,7 +16,7 @@ export enum EButtonType {
     STANDARD = 'standard',
 }
 
-export const Button = ({className, disable, label, onChange, type}: IButtonProps) => {
+export const Button = ({className, disable, label, onChange, type = EButtonType.STANDARD}: IButtonProps) => {
     const handleClick = (event: React.SyntheticEvent<HTMLButtonElement>) => {
         const value = event.currentTarget.dataset.value;
 

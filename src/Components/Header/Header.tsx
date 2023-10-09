@@ -5,12 +5,13 @@ import favouritesIcon from 'assets/profile-favorites.svg';
 import HeaderContainer, {EContainerType} from 'Components/Common/Container/Container';
 import styles from 'Components/Header/Header.module.css';
 import {SearchForm} from 'Components/SearchForm/SearchForm';
+import {ProductsContext} from 'context/ProductsProvider';
+import {useContext} from 'react';
+import {Link, useLocation} from 'react-router-dom';
 
-interface IHeaderProps {
-    onSearch: (search: string) => void;
-}
-
-export const Header = ({onSearch}: IHeaderProps) => {
+export const Header = () => {
+    const {state} = useLocation();
+    const {handleSearch} = useContext(ProductsContext);
     const renderLogo = () => {
         return (
             <div className={styles.logo}>
@@ -20,11 +21,19 @@ export const Header = ({onSearch}: IHeaderProps) => {
     };
 
     const renderHeaderProfileIcons = () => {
+        const headerIconConfig = [
+            {name: favouritesIcon, path: '/favourites'},
+            {name: cartIcon, path: '/cart'},
+            {name: profileIcon, path: '/profile'},
+        ];
+
         return (
             <div className={styles.profilesIcons}>
-                <img src={favouritesIcon} />
-                <img src={cartIcon} />
-                <img src={profileIcon} />
+                {headerIconConfig.map(({name, path}, index) => (
+                    <Link key={index} state={state} to={path}>
+                        <img src={name} />
+                    </Link>
+                ))}
             </div>
         );
     };
@@ -32,7 +41,7 @@ export const Header = ({onSearch}: IHeaderProps) => {
     return (
         <HeaderContainer className={styles.header} type={EContainerType.HEADER}>
             {renderLogo()}
-            <SearchForm onSearch={onSearch} />
+            <SearchForm onSearch={handleSearch} />
             {renderHeaderProfileIcons()}
         </HeaderContainer>
     );

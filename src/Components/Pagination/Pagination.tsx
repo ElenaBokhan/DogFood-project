@@ -2,6 +2,7 @@ import arrowPrev from 'assets/ic-left-arrow.svg';
 import arrowNext from 'assets/ic-right-arrow.svg';
 import {Button, EButtonType} from 'Components/Common/Button/Button';
 import styles from 'Components/Pagination/Pagination.module.css';
+import {PER_PAGE} from 'Const';
 
 interface IPaginationProps {
     currentPage: number;
@@ -9,7 +10,6 @@ interface IPaginationProps {
     total: number;
 }
 
-const PER_PAGE = 16;
 const PAGINATION_PAGE_AMOUNT = 5;
 const FIRST_INDEX_PAGE = 1;
 const MIDDLE_INDEX_PAGE = Math.floor(PAGINATION_PAGE_AMOUNT / 2);

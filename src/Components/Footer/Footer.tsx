@@ -6,7 +6,7 @@ import viberIcon from 'assets/viber 1.svg';
 import whatsappIcon from 'assets/whatsapp 1.svg';
 import FooterContainer, {EContainerType} from 'Components/Common/Container/Container';
 import {IconButton} from 'Components/Common/IconButton/IconButton';
-import {EFontType, ETextSize, Text} from 'Components/Common/Text/Text';
+import {EFontWeight, ETextType, Text} from 'Components/Common/Text/Text';
 import styles from 'Components/Footer/Footer.module.css';
 
 export const Footer = () => {
@@ -14,7 +14,7 @@ export const Footer = () => {
         return (
             <div className={styles.logoBlock}>
                 <img alt="logo" src={Logo} />
-                <Text size={ETextSize.S9} value={'© «Интернет-магазин DogFood.ru»'} />
+                <Text type={ETextType.S2} value={'© «Интернет-магазин DogFood.ru»'} />
             </div>
         );
     };
@@ -31,7 +31,7 @@ export const Footer = () => {
                             {column.map((menuItem) => {
                                 return (
                                     <li key={menuItem}>
-                                        <Text size={ETextSize.S14} value={menuItem} />
+                                        <Text type={ETextType.P2} value={menuItem} />
                                     </li>
                                 );
                             })}
@@ -45,9 +45,9 @@ export const Footer = () => {
     const renderContactsGroup = () => {
         return (
             <div className={styles.contacts}>
-                <Text size={ETextSize.S16} type={EFontType.GENERAL} value={'Мы на связи'} />
-                <Text size={ETextSize.S16} value={'8 (999) 00-00-00'} />
-                <Text size={ETextSize.S12} value={'dogfood.ru@gmail.com'} />
+                <Text value={'Мы на связи'} weight={EFontWeight.GENERAL} />
+                <Text value={'8 (999) 00-00-00'} />
+                <Text type={ETextType.S1} value={'dogfood.ru@gmail.com'} />
                 <div className={styles.social}>
                     <IconButton alt="telegramLogo" icon={tgIcon} />
                     <IconButton alt="whatsappLogo" icon={whatsappIcon} />

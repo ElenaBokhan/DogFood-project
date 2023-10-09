@@ -3,30 +3,6 @@
     color: black;
 }
 
-.size-9 {
-    font-size: 9px;
-}
-
-.size-12 {
-    font-size: 12px;
-}
-
-.size-14 {
-    font-size: 14px;
-}
-
-.size-16 {
-    font-size: 16px;
-}
-
-.size-20 {
-    font-size: 20px;
-}
-
-.size-28 {
-    font-size: 28px;
-}
-
 .red {
     color: #f44336;
 }
@@ -35,6 +11,56 @@
     color: #7b8e98;
 }
 
+.yellow {
+    color: #ffe44d;
+}
+
+.head-0 {
+    font-size: 48px;
+    font-weight: 900;
+}
+
+.head-1 {
+    font-size: 28px;
+    font-weight: 800;
+}
+
+.head-2 {
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.head-3 {
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.extra {
+    font-size: 72px;
+    font-weight: 800;
+
+}
+
+.paragraph-1 {
+    font-size: 16px;
+}
+
+.paragraph-2 {
+    font-size: 14px;
+}
+
+.subscribe-1 {
+    font-size: 12px;
+}
+
+.subscribe-2 {
+    font-size: 9px;
+}
+
 .bold {
     font-weight: 800;
+}
+
+.normal {
+    font-weight: 400;
 }
