@@ -3,11 +3,13 @@ import favouritesIcon from 'assets/ic-favorites.svg';
 import trashIcon from 'assets/ic-trash.svg';
 import {Button, EButtonType} from 'Components/Common/Button/Button';
 import {Gap} from 'Components/Common/Gap/Gap';
+import {IconButton} from 'Components/Common/IconButton/IconButton';
 import {EFontColor, EFontWeight, ETextType, Text} from 'Components/Common/Text/Text';
-import {UserContext} from 'Components/Layout/Layout';
 import styles from 'Components/ProductItem/ProductItem.module.css';
-import {useContext} from 'react';
 import {Link, useLocation} from 'react-router-dom';
+import {toggleLikeProduct} from 'Slices/productList/ProductListSlice';
+import {selectUser} from 'Slices/userProfile/UserProfileSelectors';
+import {UseAppDispatch, UseAppSelector} from 'Store/hooks';
 import {calculateOldPrice, isFavourite} from 'Utils/utils';
 
 interface IProductProps {
@@ -18,17 +20,22 @@ export const ProductItem = ({product}: IProductProps) => {
     const {name, price, discount, wight, description, likes, pictures, _id} = product;
 
     const state = useLocation();
-    const userProfile = useContext(UserContext) as User;
-
+    const dispatch = UseAppDispatch();
+    const userProfile = UseAppSelector(selectUser);
     const isCatalogPage = () => state.pathname === '/';
+    const isLiked = isFavourite(likes, userProfile._id);
+
+    const handleToggleLikeProduct = () => {
+        dispatch(toggleLikeProduct({productId: _id, isLiked: isLiked}));
+    };
 
     const getIconProductItem = () => {
         return isCatalogPage() ? (
-            <img
-                alt="favouritesIcon"
+            <IconButton
+                alt="favourites"
                 className={styles.favourites}
-                height={'24px'}
-                src={isFavourite(likes, userProfile._id) ? favouritesFillIcon : favouritesIcon}
+                icon={isLiked ? favouritesFillIcon : favouritesIcon}
+                onClick={handleToggleLikeProduct}
             />
         ) : (
             <img alt="trashIcon" className={styles.favourites} height={'24px'} src={trashIcon} />

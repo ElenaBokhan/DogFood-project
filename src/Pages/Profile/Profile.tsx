@@ -1,14 +1,14 @@
-import api from 'api/api';
 import mailIcon from 'assets/ic-mail.svg';
 import phoneIcon from 'assets/ic-phone.svg';
 import {Button, EButtonType} from 'Components/Common/Button/Button';
 import {EFontColor, ETextType, Text} from 'Components/Common/Text/Text';
 import {TitlePage} from 'Components/Common/TitlePage/TitlePage';
 import styles from 'Pages/Profile/Profile.module.css';
-import {useLoaderData} from 'react-router-dom';
+import {selectUser} from 'Slices/userProfile/UserProfileSelectors';
+import {UseAppSelector} from 'Store/hooks';
 
 export const Profile = () => {
-    const {name, email} = useLoaderData() as User;
+    const {name, email} = UseAppSelector(selectUser);
 
     const renderButtonBlock = () => {
         return (
@@ -42,8 +42,4 @@ export const Profile = () => {
             {renderButtonBlock()}
         </div>
     );
-};
-
-export const loaderProfile = () => {
-    return api.getUserInfo();
 };

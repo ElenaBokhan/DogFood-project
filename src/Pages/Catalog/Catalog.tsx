@@ -3,9 +3,11 @@ import {EFontWeight, ETextType, Text} from 'Components/Common/Text/Text';
 import {Pagination} from 'Components/Pagination/Pagination';
 import {ProductList} from 'Components/ProductList/ProductList';
 import {SortFilter} from 'Components/SortFilter/SortFilter';
-import {ProductsContext} from 'context/ProductsProvider';
 import styles from 'Pages/Catalog/Catalog.module.css';
-import {useContext} from 'react';
+import {useEffect} from 'react';
+import {selectFilter, selectProductList} from 'Slices/productList/ProductListSelectors';
+import {getProductsList} from 'Slices/productList/ProductListSlice';
+import {UseAppDispatch, UseAppSelector} from 'Store/hooks';
 
 export enum ESortFilter {
     POPULAR = 'Популярные',
@@ -19,14 +21,14 @@ export enum ESortFilter {
 const filters = ['Популярные', 'Новинки', 'Сначала дешёвые', 'Сначала дорогие', 'По рейтингу', 'По скидке'];
 
 export const Catalog = () => {
-    // const handleLoading = useContext(LoadingContext);
-    // const {productsList, handleChangePage, handleChangeSort, search, currentPage, isLoading, sortFilter} =
-    //     useContext(ProductsContext);
-    // const {products, total} = productsList;
+    const {isLoading, products, total} = UseAppSelector(selectProductList);
+    const filter = UseAppSelector(selectFilter);
+    const dispatch = UseAppDispatch();
+    const {search} = filter;
 
-    const data = useContext(ProductsContext);
-    const {productsList, handleChangePage, handleChangeSort, search, currentPage, isLoading, sortFilter} = data || {};
-    const {products, total} = productsList || {};
+    useEffect(() => {
+        dispatch(getProductsList(filter));
+    }, [filter]);
 
     const searchResultText = () => {
         const text = (
@@ -50,10 +52,10 @@ export const Catalog = () => {
     return (
         <>
             {showSearchResultText && searchResultText()}
-            <SortFilter filters={filters} onChangeFilter={handleChangeSort} selected={sortFilter} />
+            <SortFilter filters={filters} />
             {showNotFound && <NotFound />}
-            {products && <ProductList products={products} />}
-            {products?.length > 0 && <Pagination currentPage={currentPage} onChange={handleChangePage} total={total} />}
+            {!!products && <ProductList products={products} />}
+            {products?.length > 0 && <Pagination currentPage={filter.page} total={total} />}
         </>
     );
 };

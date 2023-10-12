@@ -1,40 +1,26 @@
-import api from 'api/api';
 import MainContainer, {EContainerType} from 'Components/Common/Container/Container';
 import {Footer} from 'Components/Footer/Footer';
 import {Header} from 'Components/Header/Header';
 import styles from 'Components/Layout/Layout.module.css';
-import {ProductsProvider} from 'context/ProductsProvider';
-import {createContext} from 'react';
-import {Outlet, useLoaderData} from 'react-router-dom';
-
-export const UserContext = createContext<User>(null);
-
-interface ILoaderData {
-    user: User;
-}
+import {useLayoutEffect} from 'react';
+import {Outlet} from 'react-router-dom';
+import {getUserProfile} from 'Slices/userProfile/UserProfileSlice';
+import {UseAppDispatch} from 'Store/hooks';
 
 export const Layout = () => {
-    const {user} = useLoaderData() as ILoaderData;
+    const dispatch = UseAppDispatch();
+
+    useLayoutEffect(() => {
+        dispatch(getUserProfile());
+    }, []);
 
     return (
-        <UserContext.Provider value={user}>
-            <ProductsProvider>
-                <div className={styles.layout}>
-                    <Header />
-                    <MainContainer className={styles.main} type={EContainerType.MAIN}>
-                        <Outlet />
-                    </MainContainer>
-                    <Footer />
-                </div>
-            </ProductsProvider>
-        </UserContext.Provider>
+        <div className={styles.layout}>
+            <Header />
+            <MainContainer className={styles.main} type={EContainerType.MAIN}>
+                <Outlet />
+            </MainContainer>
+            <Footer />+{' '}
+        </div>
     );
-};
-
-export const loaderLayout = async () => {
-    const getUser = async () => {
-        return await api.getUserInfo();
-    };
-
-    return {user: await getUser()};
 };

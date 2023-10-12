@@ -2,13 +2,13 @@ import searchIcon from 'assets/ic-close-input.svg';
 import {IconButton} from 'Components/Common/IconButton/IconButton';
 import styles from 'Components/SearchForm/SearchForm.module.css';
 import React, {FormEvent, useState} from 'react';
+import {searchProducts} from 'Slices/productList/ProductListSlice';
+import {UseAppDispatch} from 'Store/hooks';
 
-interface ISearchFormProps {
-    onSearch: (search: string) => void;
-}
-
-export const SearchForm = ({onSearch}: ISearchFormProps) => {
+export const SearchForm = () => {
     const [filter, setFilter] = useState<string>('');
+
+    const dispatch = UseAppDispatch();
 
     const handleFilterChange = (event: React.SyntheticEvent<HTMLInputElement>) => {
         const filterText = event.currentTarget.value;
@@ -18,11 +18,11 @@ export const SearchForm = ({onSearch}: ISearchFormProps) => {
 
     const handleClear = () => {
         setFilter('');
-        onSearch('');
+        dispatch(searchProducts(''));
     };
 
     const handleSubmit = (event: FormEvent) => {
-        onSearch(filter);
+        dispatch(searchProducts(filter));
         event.preventDefault();
     };
 
