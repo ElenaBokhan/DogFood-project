@@ -42,25 +42,23 @@ export const ProductItem = ({product}: IProductProps) => {
         );
     };
 
-    const renderTextContent = () => {
-        return (
-            <div className={styles.textContent}>
-                {!!discount && (
-                    <Text className={styles.oldPrice} type={ETextType.S1} value={calculateOldPrice(price, discount)} />
-                )}
-                <Text
-                    className={styles.price}
-                    fontColor={!!discount && EFontColor.RED}
-                    type={ETextType.H3}
-                    value={price}
-                    weight={EFontWeight.GENERAL}
-                />
-                <Gap size={6} />
-                <Text fontColor={EFontColor.GREY} type={ETextType.S1} value={wight} />
-                <Text value={name} />
-            </div>
-        );
-    };
+    const renderTextContent = () => (
+        <div className={styles.textContent}>
+            {!!discount && (
+                <Text className={styles.oldPrice} type={ETextType.S1} value={calculateOldPrice(price, discount)} />
+            )}
+            <Text
+                className={styles.price}
+                fontColor={!!discount && EFontColor.RED}
+                type={ETextType.H3}
+                value={price}
+                weight={EFontWeight.GENERAL}
+            />
+            <Gap size={6} />
+            <Text fontColor={EFontColor.GREY} type={ETextType.S1} value={wight} />
+            <Text value={name} />
+        </div>
+    );
 
     return (
         <div className={styles.productItem}>

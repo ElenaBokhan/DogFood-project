@@ -19,9 +19,7 @@ export enum EContainerType {
 const Container: React.FC<IContainerProps> = ({children, type, className}: IContainerProps) => {
     const isLoading = UseAppSelector(loadingSelector);
 
-    const getContent = () => {
-        return <div className={cn(styles.container, className)}>{children}</div>;
-    };
+    const getContent = () => <div className={cn(styles.container, className)}>{children}</div>;
 
     const getContainer = () => {
         switch (type) {

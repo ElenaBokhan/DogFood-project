@@ -7,10 +7,8 @@ interface ILinkButtonProps {
     path: string;
 }
 
-export const LinkButton = ({path, label}: ILinkButtonProps) => {
-    return (
-        <Link className={styles.link} to={path}>
-            <Button label={label} theme={EButtonTheme.REDIRECT} />
-        </Link>
-    );
-};
+export const LinkButton = ({path, label}: ILinkButtonProps) => (
+    <Link className={styles.link} to={path}>
+        <Button label={label} theme={EButtonTheme.REDIRECT} />
+    </Link>
+);

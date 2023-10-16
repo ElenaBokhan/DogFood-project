@@ -8,14 +8,12 @@ interface ISortFilterItemProps {
     onChangeFilter: (event: React.SyntheticEvent<HTMLButtonElement>) => void;
 }
 
-export const SortFilterItem = ({isSelected, label, onChangeFilter}: ISortFilterItemProps) => {
-    return (
-        <button
-            className={cn(styles.filterItem, isSelected && styles.selected)}
-            data-value={label}
-            onClick={onChangeFilter}
-        >
-            {label}
-        </button>
-    );
-};
+export const SortFilterItem = ({isSelected, label, onChangeFilter}: ISortFilterItemProps) => (
+    <button
+        className={cn(styles.filterItem, isSelected && styles.selected)}
+        data-value={label}
+        onClick={onChangeFilter}
+    >
+        {label}
+    </button>
+);

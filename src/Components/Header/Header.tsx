@@ -15,13 +15,11 @@ export const Header = () => {
     const navigate = useNavigate();
     const dispatch = UseAppDispatch();
 
-    const renderLogo = () => {
-        return (
-            <div className={styles.logo}>
-                <img src={Logo} alt="logoMain" />
-            </div>
-        );
-    };
+    const renderLogo = () => (
+        <div className={styles.logo}>
+            <img src={Logo} alt="logoMain" />
+        </div>
+    );
 
     const redirect = (path: string) => () => navigate(path);
 

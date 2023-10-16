@@ -42,11 +42,9 @@ export const Text = ({
     value,
     weight,
     className,
-}: ITextProps) => {
-    return (
-        <span className={cn(className, styles[fontColor], styles[weight], styles[type])}>
-            {value}
-            {children}
-        </span>
-    );
-};
+}: ITextProps) => (
+    <span className={cn(className, styles[fontColor], styles[weight], styles[type])}>
+        {value}
+        {children}
+    </span>
+);

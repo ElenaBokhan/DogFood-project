@@ -40,18 +40,16 @@ export const SignUpForm = () => {
         navigate('/signin');
     };
 
-    const renderButtonsControl = () => {
-        return (
-            <div className={styles.buttonsContainer}>
-                <Button
-                    disable={isSubmitting || (isSubmitted && (!isValid || isSubmitting))}
-                    label={'Зарегистрироваться'}
-                    type={'submit'}
-                />
-                <Button onChange={redirectToSignIn} theme={EButtonTheme.REDIRECT} label={'Войти'} />
-            </div>
-        );
-    };
+    const renderButtonsControl = () => (
+        <div className={styles.buttonsContainer}>
+            <Button
+                disable={isSubmitting || (isSubmitted && (!isValid || isSubmitting))}
+                label={'Зарегистрироваться'}
+                type={'submit'}
+            />
+            <Button onChange={redirectToSignIn} theme={EButtonTheme.REDIRECT} label={'Войти'} />
+        </div>
+    );
 
     const onSubmit: SubmitHandler<TFormSignUpData> = async (data) => {
         // eslint-disable-next-line no-useless-catch

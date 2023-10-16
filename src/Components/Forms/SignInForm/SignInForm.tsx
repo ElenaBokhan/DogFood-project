@@ -41,23 +41,21 @@ export const SignInForm = () => {
         navigate(objectHasProperty(state, 'from') && typeof state.from === 'string' ? state.from : '/');
     };
 
-    const renderButtonsControl = () => {
-        return (
-            <div className={styles.buttonsContainer}>
-                <Button
-                    disable={isSubmitting || (isSubmitted && (!isValid || isSubmitting))}
-                    label={'Войти'}
-                    type={'submit'}
-                />
-                <Button
-                    theme={EButtonTheme.REDIRECT}
-                    onChange={redirectToSignUp}
-                    disable={isSubmitting}
-                    label={'Зарегистрироваться'}
-                />
-            </div>
-        );
-    };
+    const renderButtonsControl = () => (
+        <div className={styles.buttonsContainer}>
+            <Button
+                disable={isSubmitting || (isSubmitted && (!isValid || isSubmitting))}
+                label={'Войти'}
+                type={'submit'}
+            />
+            <Button
+                theme={EButtonTheme.REDIRECT}
+                onChange={redirectToSignUp}
+                disable={isSubmitting}
+                label={'Зарегистрироваться'}
+            />
+        </div>
+    );
 
     const onSubmit: SubmitHandler<TFormSignInData> = async (value) => {
         try {

@@ -46,66 +46,58 @@ export const ProductCard = () => {
         );
     };
 
-    const renderProductMain = () => {
-        return (
-            <div className={styles.productMain}>
-                <div>
-                    {!!discount && <div className={styles.discount}>{discount + ' %'}</div>}
-                    <img alt={description} className={styles.pictures} src={pictures} width={'488px'} />
-                    <IconButton alt={'searchIcon'} icon={searchIcon} />
-                </div>
-                <div className={styles.productMainInfo}>
-                    <div className={styles.priceConteiner}>
-                        {!!discount && (
-                            <Text
-                                className={styles.oldPrice}
-                                type={ETextType.S1}
-                                value={calculateOldPrice(price, discount)}
-                            />
-                        )}
-                        <Text
-                            className={styles.price}
-                            fontColor={discount && EFontColor.RED}
-                            type={ETextType.H3}
-                            value={price}
-                            weight={EFontWeight.GENERAL}
-                        />
-                    </div>
-                    <BusketSelector />
-                    {renderAddToFavouriteButton()}
-                </div>
+    const renderProductMain = () => (
+        <div className={styles.productMain}>
+            <div>
+                {!!discount && <div className={styles.discount}>{discount + ' %'}</div>}
+                <img alt={description} className={styles.pictures} src={pictures} width={'488px'} />
+                <IconButton alt={'searchIcon'} icon={searchIcon} />
             </div>
-        );
-    };
+            <div className={styles.productMainInfo}>
+                <div className={styles.priceConteiner}>
+                    {!!discount && (
+                        <Text
+                            className={styles.oldPrice}
+                            type={ETextType.S1}
+                            value={calculateOldPrice(price, discount)}
+                        />
+                    )}
+                    <Text
+                        className={styles.price}
+                        fontColor={discount && EFontColor.RED}
+                        type={ETextType.H3}
+                        value={price}
+                        weight={EFontWeight.GENERAL}
+                    />
+                </div>
+                <BusketSelector />
+                {renderAddToFavouriteButton()}
+            </div>
+        </div>
+    );
 
-    const renderDescription = () => {
-        return (
-            <>
-                <Text type={ETextType.H3} value={'Описание'} />
-                <Text value={description} />
-            </>
-        );
-    };
+    const renderDescription = () => (
+        <>
+            <Text type={ETextType.H3} value={'Описание'} />
+            <Text value={description} />
+        </>
+    );
 
-    const renderSpecifications = () => {
-        return (
-            <>
-                <Text type={ETextType.H3} value={'Характеристики'} />
-                some specific
-            </>
-        );
-    };
+    const renderSpecifications = () => (
+        <>
+            <Text type={ETextType.H3} value={'Характеристики'} />
+            some specific
+        </>
+    );
 
-    const renderReviews = () => {
-        return (
-            <>
-                <Text type={ETextType.H3} value={'Отзывы'} />
-                {reviews.map((review) => (
-                    <Review key={review._id} review={review} />
-                ))}
-            </>
-        );
-    };
+    const renderReviews = () => (
+        <>
+            <Text type={ETextType.H3} value={'Отзывы'} />
+            {reviews.map((review) => (
+                <Review key={review._id} review={review} />
+            ))}
+        </>
+    );
 
     return (
         <div className={styles.productCard}>
