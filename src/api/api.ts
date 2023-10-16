@@ -1,14 +1,19 @@
 import {config} from 'api/config';
-// eslint-disable-next-line import/named
-import axios, {AxiosResponse, CreateAxiosDefaults} from 'axios';
+import axios from 'axios';
+import type {AxiosResponse, CreateAxiosDefaults} from 'axios';
 
-interface IClientFilter {
-    search: string;
-    page: number;
-    perPage: number;
+export interface IUpdateUserRequest {
+    name: string;
+    about: string;
 }
 
-const {get} = axios.create({
+const {
+    get,
+    patch,
+    post,
+    put,
+    delete: deleteAxios,
+} = axios.create({
     baseURL: config.apiUrl,
     headers: {
         'Content-Type': 'application/json',
@@ -16,21 +21,37 @@ const {get} = axios.create({
     },
 } as CreateAxiosDefaults);
 
-class Api {
+export class Api {
     private onAxiosResponse(res: AxiosResponse) {
-        return res.data ? res.data : Promise.reject();
-        // return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
+        return res.data ? Promise.resolve(res.data) : Promise.reject();
     }
 
-    getUserInfo = () => get<User>('/users/me').then((response) => this.onAxiosResponse(response));
+    getUserProfile = () => get<IUser>('/users/me').then((response) => this.onAxiosResponse(response));
+
+    updateUserProfile = (userData: IUpdateUserRequest) =>
+        patch<IUser>('/users/me', userData).then((response) => this.onAxiosResponse(response));
 
     getProductList = ({search, page, perPage}: IClientFilter) =>
         get<IProductsList>(`/products?page=${page}&limit=${perPage}&query=${search}`).then((response) =>
             this.onAxiosResponse(response)
         );
 
+    deleteProduct = (productId: string) =>
+        deleteAxios<IProduct>(`${config.apiUrl}/products/${productId}`).then((response) =>
+            this.onAxiosResponse(response)
+        );
+
     getProductById = (productId: string) =>
         get<IProduct>(`/products/${productId}`).then((response) => this.onAxiosResponse(response));
+
+    addReview = (productId: string) =>
+        post<IProduct>(`/products/review/${productId}`).then((response) => this.onAxiosResponse(response));
+
+    likeProduct = (productId: string) =>
+        put<IProduct>(`/products/likes/${productId}`).then((response) => this.onAxiosResponse(response));
+
+    unlikeProduct = (productId: string) =>
+        deleteAxios<IProduct>(`/products/likes/${productId}`).then((response) => this.onAxiosResponse(response));
 }
 
 export default new Api();

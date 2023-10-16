@@ -7,6 +7,8 @@ const a11yRules = require('./webpack/eslintRules/rules/7-jsx-a11y');
 
 module.exports = {
     env: {
+        browser: true,
+        node: true,
         es6: true,
     },
     parser: '@typescript-eslint/parser',
@@ -63,6 +65,7 @@ module.exports = {
             },
         ],
         // Правила Prettier.
+        '@typescript-eslint/no-unused-vars': 'off',
         'no-empty-function': 'warn',
         'prettier/prettier': 'error',
         'arrow-body-style': 'off',

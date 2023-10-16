@@ -1,8 +1,9 @@
 import cn from 'classnames';
 import styles from 'Components/Common/Container/Container.module.css';
 import {Loader} from 'Components/Common/Loader/Loader';
-import {ProductsContext} from 'context/ProductsProvider';
-import React, {useContext} from 'react';
+import React from 'react';
+import {selectProductList} from 'Slices/productList/ProductListSelectors';
+import {UseAppSelector} from 'Store/hooks';
 
 interface IContainerProps {
     className?: string;
@@ -16,7 +17,7 @@ export enum EContainerType {
 }
 
 const Container: React.FC<IContainerProps> = ({children, type, className}: IContainerProps) => {
-    const {isLoading} = useContext(ProductsContext);
+    const {isLoading} = UseAppSelector(selectProductList);
 
     const getContent = () => {
         return <div className={cn(styles.container, className)}>{children}</div>;

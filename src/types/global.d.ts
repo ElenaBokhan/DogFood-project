@@ -1,13 +1,19 @@
 export {};
 
 declare global {
+    interface IClientFilter {
+        search: string;
+        page: number;
+        perPage: number;
+    }
+
     interface IProductsList {
         products: IProduct[];
         total: number;
     }
 
     interface IProduct {
-        author?: User;
+        author?: IUser;
         name: string;
         price: number;
         discount: number;
@@ -29,7 +35,7 @@ declare global {
     interface IReview {
         _id: string;
         text: string;
-        author?: User;
+        author?: IUser;
         product?: string;
         updated_at?: string;
         created_at?: string;
@@ -43,14 +49,14 @@ declare global {
         isPublished?: boolean;
         _id: string;
         title: string;
-        author: User;
+        author: IUser;
         text: string;
         created_at?: string;
         updated_at?: string;
         __v?: number;
     }
 
-    interface User {
+    interface IUser {
         name: string;
         about: string;
         avatar: string;

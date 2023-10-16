@@ -13,12 +13,13 @@ export const Favourites = () => {
         const labelButton = (
             <>
                 <span>{'Показать еще'}</span>
-                <img src={arrowDown} alt="arrowDown" />
+                <img alt="arrowDown" src={arrowDown} />
             </>
         );
 
         return <Button label={labelButton} type={EButtonType.REDIRECT} />;
     };
+
     return (
         <div className={style.favourites}>
             <TitlePage label={'Избранное'} />
