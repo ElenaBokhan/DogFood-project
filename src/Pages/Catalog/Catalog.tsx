@@ -3,11 +3,14 @@ import {EFontWeight, ETextType, Text} from 'Components/Common/Text/Text';
 import {Pagination} from 'Components/Pagination/Pagination';
 import {ProductList} from 'Components/ProductList/ProductList';
 import {SortFilter} from 'Components/SortFilter/SortFilter';
+import {withProtection} from 'HOCs/withProtection';
 import styles from 'Pages/Catalog/Catalog.module.css';
-import {useEffect} from 'react';
-import {selectFilter, selectProductList} from 'Slices/productList/ProductListSelectors';
-import {getProductsList} from 'Slices/productList/ProductListSlice';
+import {useEffect, useState} from 'react';
+import {useProductListQuery} from 'Store/Api/productListApi';
 import {UseAppDispatch, UseAppSelector} from 'Store/hooks';
+import {setLoading} from 'Store/Slices/loading/Loading';
+import {selectFilter, selectSortFilter} from 'Store/Slices/productList/ProductListSelectors';
+import {getSortingProducts} from 'Utils/utils';
 
 export enum ESortFilter {
     POPULAR = 'Популярные',
@@ -18,17 +21,30 @@ export enum ESortFilter {
     DISCOUNT = 'По скидке',
 }
 
-const filters = ['Популярные', 'Новинки', 'Сначала дешёвые', 'Сначала дорогие', 'По рейтингу', 'По скидке'];
+export const Catalog = withProtection(() => {
+    const [productList, setProductList] = useState<IProduct[]>();
 
-export const Catalog = () => {
-    const {isLoading, products, total} = UseAppSelector(selectProductList);
     const filter = UseAppSelector(selectFilter);
+    const sortFilter = UseAppSelector(selectSortFilter);
     const dispatch = UseAppDispatch();
+    const {data, isFetching} = useProductListQuery(filter);
+    const {products, total} = data || {};
     const {search} = filter;
 
     useEffect(() => {
-        dispatch(getProductsList(filter));
-    }, [filter]);
+        products && setProductList(products);
+    }, [products]);
+
+    useEffect(() => {
+        if (productList) {
+            const sortingProducts = getSortingProducts(productList, sortFilter);
+            setProductList(sortingProducts);
+        }
+    }, [sortFilter]);
+
+    useEffect(() => {
+        dispatch(setLoading(isFetching));
+    }, [dispatch, isFetching]);
 
     const searchResultText = () => {
         const text = (
@@ -46,16 +62,16 @@ export const Catalog = () => {
         );
     };
 
-    const showNotFound = search && products?.length === 0 && !isLoading;
-    const showSearchResultText = search && !isLoading;
+    const showNotFound = search && products?.length === 0 && !isFetching;
+    const showSearchResultText = search && !isFetching;
 
     return (
         <>
             {showSearchResultText && searchResultText()}
-            <SortFilter filters={filters} />
+            <SortFilter />
             {showNotFound && <NotFound />}
-            {!!products && <ProductList products={products} />}
+            {!!products && <ProductList products={productList} />}
             {products?.length > 0 && <Pagination currentPage={filter.page} total={total} />}
         </>
     );
-};
+});

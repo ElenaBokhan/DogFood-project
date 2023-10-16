@@ -1,23 +1,20 @@
 import styles from 'Components/SortFilter/SortFilter.module.css';
 import {SortFilterItem} from 'Components/SortFilter/SortFilterItem';
 import {ESortFilter} from 'Pages/Catalog/Catalog';
-import React, {useCallback, useState} from 'react';
-import {sortProductsList} from 'Slices/productList/ProductListSlice';
-import {UseAppDispatch} from 'Store/hooks';
+import React, {useCallback} from 'react';
+import {UseAppDispatch, UseAppSelector} from 'Store/hooks';
+import {selectSortFilter} from 'Store/Slices/productList/ProductListSelectors';
+import {setSortFilter} from 'Store/Slices/productList/ProductListSlice';
 
-interface IFilterPanelProps {
-    filters: string[];
-}
+const filters = ['Популярные', 'Новинки', 'Сначала дешёвые', 'Сначала дорогие', 'По рейтингу', 'По скидке'];
 
-export const SortFilter = ({filters}: IFilterPanelProps) => {
-    const [sortFilter, setSortFilter] = useState<ESortFilter>(ESortFilter.POPULAR);
+export const SortFilter = () => {
     const dispatch = UseAppDispatch();
+    const sortFilter = UseAppSelector(selectSortFilter);
 
     const handleChangeSort = useCallback((event: React.SyntheticEvent<HTMLButtonElement>) => {
         const currentFilter = event.currentTarget.dataset.value;
-        setSortFilter(currentFilter as ESortFilter);
-
-        dispatch(sortProductsList(currentFilter as ESortFilter));
+        dispatch(setSortFilter(currentFilter as ESortFilter));
     }, []);
 
     return (

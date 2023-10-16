@@ -4,8 +4,8 @@ import {Header} from 'Components/Header/Header';
 import styles from 'Components/Layout/Layout.module.css';
 import {useLayoutEffect} from 'react';
 import {Outlet} from 'react-router-dom';
-import {getUserProfile} from 'Slices/userProfile/UserProfileSlice';
 import {UseAppDispatch} from 'Store/hooks';
+import {getUserProfile} from 'Store/Slices/userProfile/UserProfileSlice';
 
 export const Layout = () => {
     const dispatch = UseAppDispatch();
@@ -20,7 +20,7 @@ export const Layout = () => {
             <MainContainer className={styles.main} type={EContainerType.MAIN}>
                 <Outlet />
             </MainContainer>
-            <Footer />+{' '}
+            <Footer />
         </div>
     );
 };

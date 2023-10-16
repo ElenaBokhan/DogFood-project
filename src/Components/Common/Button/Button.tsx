@@ -7,23 +7,30 @@ interface IButtonProps {
     disable?: boolean;
     label: string | number | React.ReactNode;
     onChange?: (page: number) => void;
-    type?: EButtonType;
+    theme?: EButtonTheme;
+    type?: 'button' | 'submit' | 'reset';
 }
 
-export enum EButtonType {
+export enum EButtonTheme {
     PAGINATION = 'pagination',
     REDIRECT = 'redirect',
     STANDARD = 'standard',
 }
 
-export const Button = ({className, disable, label, onChange, type = EButtonType.STANDARD}: IButtonProps) => {
+export const Button = ({className, disable, label, onChange, theme = EButtonTheme.STANDARD, type}: IButtonProps) => {
     const handleClick = (event: React.SyntheticEvent<HTMLButtonElement>) => {
         const value = event.currentTarget.dataset.value;
 
         !disable && !!onChange && onChange(+value);
     };
     return (
-        <button className={cn(styles.button, styles[type], styles[className])} data-value={label} onClick={handleClick}>
+        <button
+            disabled={disable}
+            className={cn(styles.button, styles[theme], styles[className], disable && styles.disable)}
+            data-value={label}
+            onClick={handleClick}
+            type={type || 'button'}
+        >
             {label}
         </button>
     );

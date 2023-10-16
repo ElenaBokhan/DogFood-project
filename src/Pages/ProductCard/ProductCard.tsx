@@ -1,19 +1,19 @@
 import favouritesFillIcon from 'assets/ic-favorites-fill.svg';
 import favouritesIcon from 'assets/ic-favorites.svg';
 import searchIcon from 'assets/ic-search.svg';
-import {Button, EButtonType} from 'Components/Common/Button/Button';
+import {Button, EButtonTheme} from 'Components/Common/Button/Button';
 import {IconButton} from 'Components/Common/IconButton/IconButton';
 import {EFontColor, EFontWeight, ETextType, Text} from 'Components/Common/Text/Text';
 import {TitlePage} from 'Components/Common/TitlePage/TitlePage';
 import {Review} from 'Components/Review/Review';
 import {BusketSelector} from 'Pages/ProductCard/BusketSelector';
 import styles from 'Pages/ProductCard/ProductCard.module.css';
-import {useLayoutEffect} from 'react';
+import {useEffect} from 'react';
 import {useLocation, useParams} from 'react-router-dom';
-import {selectProduct} from 'Slices/product/ProductSelectors';
-import {getProduct, toggleLikeProductCard} from 'Slices/product/ProductSlice';
-import {selectUser} from 'Slices/userProfile/UserProfileSelectors';
 import {UseAppDispatch, UseAppSelector} from 'Store/hooks';
+import {selectProduct} from 'Store/Slices/product/ProductSelectors';
+import {getProduct, toggleLikeProductCard} from 'Store/Slices/product/ProductSlice';
+import {selectUser} from 'Store/Slices/userProfile/UserProfileSelectors';
 import {calculateOldPrice, isFavourite} from 'Utils/utils';
 
 export const ProductCard = () => {
@@ -25,9 +25,9 @@ export const ProductCard = () => {
     const {data, isLoading} = UseAppSelector(selectProduct);
     const {name, price, discount, description, likes, _id, pictures, reviews} = data || {};
 
-    const isLiked = !isLoading && isFavourite(likes, userProfile._id);
+    const isLiked = !isLoading && data && isFavourite(likes, userProfile?._id);
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         dispatch(getProduct(productId));
     }, []);
 
@@ -109,14 +109,14 @@ export const ProductCard = () => {
 
     return (
         <div className={styles.productCard}>
-            {!isLoading && (
+            {data && (
                 <>
                     <TitlePage label={name} pathName={state.pathname} />
                     {renderProductMain()}
                     {renderDescription()}
                     {renderSpecifications()}
                     {renderReviews()}
-                    <Button label={'Все отзывы'} type={EButtonType.REDIRECT} />
+                    <Button label={'Все отзывы'} theme={EButtonTheme.REDIRECT} />
                 </>
             )}
         </div>
