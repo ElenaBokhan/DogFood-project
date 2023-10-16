@@ -3,10 +3,11 @@ import arrowNext from 'assets/ic-right-arrow.svg';
 import {Button, EButtonType} from 'Components/Common/Button/Button';
 import styles from 'Components/Pagination/Pagination.module.css';
 import {PER_PAGE} from 'Const';
+import {changePage} from 'Slices/productList/ProductListSlice';
+import {UseAppDispatch} from 'Store/hooks';
 
 interface IPaginationProps {
     currentPage: number;
-    onChange: (page: number) => void;
     total: number;
 }
 
@@ -19,19 +20,25 @@ enum EArrow {
     RIGHT,
 }
 
-export const Pagination = ({currentPage, onChange, total}: IPaginationProps) => {
+export const Pagination = ({currentPage, total}: IPaginationProps) => {
+    const dispatch = UseAppDispatch();
+
     const lastIndexPage = Math.floor(total / PER_PAGE);
 
     const handlePrevPage = () => {
-        onChange(currentPage - 1);
+        dispatch(changePage(currentPage - 1));
     };
 
     const handleNextPage = () => {
-        onChange(currentPage + 1);
+        dispatch(changePage(currentPage + 1));
     };
 
     const handleDotsPage = () => {
-        onChange(lastIndexPage > PAGINATION_PAGE_AMOUNT ? currentPage + 1 : currentPage - 1);
+        dispatch(changePage(currentPage < lastIndexPage - MIDDLE_INDEX_PAGE ? currentPage + 1 : currentPage - 1));
+    };
+
+    const handlePageItemsClick = (page: number) => {
+        dispatch(changePage(page));
     };
 
     const renderArrowButton = (arrow: EArrow) => {
@@ -42,7 +49,7 @@ export const Pagination = ({currentPage, onChange, total}: IPaginationProps) => 
 
         const labelButton = (
             <>
-                <img src={icon} alt='arrowIcon' />
+                <img src={icon} />
                 <span>{label}</span>
             </>
         );
@@ -85,12 +92,12 @@ export const Pagination = ({currentPage, onChange, total}: IPaginationProps) => 
 
         return (
             <div className={styles.paginationItems}>
-                {pageItems.map((item) => (
+                {pageItems.map((item, index) => (
                     <Button
                         className={item === currentPage && 'selected'}
-                        key={item.toString()}
+                        key={index}
                         label={item}
-                        onChange={item === dotsPage ? handleDotsPage : onChange}
+                        onChange={item === dotsPage ? handleDotsPage : handlePageItemsClick}
                         type={EButtonType.PAGINATION}
                     />
                 ))}
