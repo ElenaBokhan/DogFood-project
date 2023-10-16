@@ -1,0 +1,17 @@
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.profile img {
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}

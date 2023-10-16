@@ -5,6 +5,8 @@
     border-radius: 12px;
     box-shadow: 0 8px 16px 0 rgb(96 97 112 / 16%), 0 2px 4px 0 rgb(40 41 61 / 4%);
     width: 992px;
+    position: absolute;
+    top: 0;
 }
 
 .filter-item {

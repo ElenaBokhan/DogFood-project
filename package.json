@@ -65,9 +65,12 @@
 	},
 	"dependencies": {
 		"@fontsource/nunito": "5.0.8",
+		"@types/react-router-dom": "5.3.3",
+		"axios": "1.5.1",
 		"classnames": "^2.3.2",
 		"react": "^18.2.0",
-		"react-dom": "^18.2.0"
+		"react-dom": "^18.2.0",
+		"react-router-dom": "6.16.0"
 	},
 	"lint-staged": {
 		"*.{css,scss}": "yarn stylelint:fix",
