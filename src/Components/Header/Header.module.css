@@ -6,12 +6,6 @@
     height: 80px;
 }
 
-.logo {
-    width: 224px;
-    height: 56px;
-    flex-shrink: 0;
-}
-
 .profiles-icons {
     display: flex;
     width: 140px;

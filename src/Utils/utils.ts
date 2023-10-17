@@ -1,5 +1,5 @@
 import {PER_PAGE} from 'Const';
-import {ESortFilter} from 'Pages/Catalog/Catalog';
+import {ESortFilter} from 'Store/Slices/productList/ProductListSlice';
 
 export const calculateOldPrice = (price: number, discount: number) => {
     return Math.floor(price - (price * discount) / 100);
@@ -17,8 +17,6 @@ export const dateFormatter = new Intl.DateTimeFormat('ru-RU', {
     year: 'numeric',
     month: 'short',
     day: '2-digit',
-    // hour: '2-digit',
-    // minute: '2-digit',
 });
 
 export const objectHasProperty = <P extends PropertyKey>(obj: unknown, prop: P): obj is object & Record<P, unknown> => {

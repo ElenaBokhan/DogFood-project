@@ -1,35 +1,36 @@
 import searchIcon from 'assets/ic-close-input.svg';
 import {IconButton} from 'Components/Common/IconButton/IconButton';
 import styles from 'Components/SearchForm/SearchForm.module.css';
-import React, {FormEvent, useState} from 'react';
+import {useSearchForm} from 'hooks/useSearchForm';
+import {FormEvent} from 'react';
 import {UseAppDispatch} from 'Store/hooks';
 import {searchProducts} from 'Store/Slices/productList/ProductListSlice';
 
+export const SEARCH_PARAMS_KEY = 'query';
+
 export const SearchForm = () => {
-    const [filter, setFilter] = useState<string>('');
+    const [search, setSearch] = useSearchForm();
 
     const dispatch = UseAppDispatch();
 
+    const handleSubmit = (event: FormEvent) => {
+        dispatch(searchProducts(search));
+        event.preventDefault();
+    };
+
     const handleFilterChange = (event: React.SyntheticEvent<HTMLInputElement>) => {
         const filterText = event.currentTarget.value;
-
-        setFilter(filterText);
+        setSearch(filterText);
     };
 
     const handleClear = () => {
-        setFilter('');
-        dispatch(searchProducts(''));
-    };
-
-    const handleSubmit = (event: FormEvent) => {
-        dispatch(searchProducts(filter));
-        event.preventDefault();
+        setSearch('');
     };
 
     return (
         <div className={styles.searchForm}>
             <form onSubmit={handleSubmit}>
-                <input onChange={handleFilterChange} placeholder={'Поиск товаров'} value={filter} />
+                <input onChange={handleFilterChange} placeholder={'Поиск товаров'} value={search} />
             </form>
             <IconButton alt="searchButton" icon={searchIcon} onClick={handleClear} />
         </div>

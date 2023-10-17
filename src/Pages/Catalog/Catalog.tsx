@@ -1,3 +1,4 @@
+import {LoadMore} from 'Components/Common/LoadMore/LoadMore';
 import {NotFound} from 'Components/Common/NotFound/NotFound';
 import {EFontWeight, ETextType, Text} from 'Components/Common/Text/Text';
 import {Pagination} from 'Components/Pagination/Pagination';
@@ -10,19 +11,13 @@ import {useProductListQuery} from 'Store/Api/productListApi';
 import {UseAppDispatch, UseAppSelector} from 'Store/hooks';
 import {setLoading} from 'Store/Slices/loading/Loading';
 import {selectFilter, selectSortFilter} from 'Store/Slices/productList/ProductListSelectors';
+import {changePage} from 'Store/Slices/productList/ProductListSlice';
 import {getSortingProducts} from 'Utils/utils';
 
-export enum ESortFilter {
-    POPULAR = 'Популярные',
-    NEW = 'Новинки',
-    CHEAPER_FIRST = 'Сначала дешёвые',
-    EXPENSIVE_FIRST = 'Сначала дорогие',
-    RATING = 'По рейтингу',
-    DISCOUNT = 'По скидке',
-}
+const isGetListByPaginate = false;
 
 export const Catalog = withProtection(() => {
-    const [productList, setProductList] = useState<IProduct[]>();
+    const [productList, setProductList] = useState<IProduct[]>([]);
 
     const filter = UseAppSelector(selectFilter);
     const sortFilter = UseAppSelector(selectSortFilter);
@@ -36,15 +31,18 @@ export const Catalog = withProtection(() => {
     }, [products]);
 
     useEffect(() => {
-        if (productList) {
-            const sortingProducts = getSortingProducts(productList, sortFilter);
-            setProductList(sortingProducts);
-        }
+        const sortingProducts = getSortingProducts(productList, sortFilter);
+        setProductList(sortingProducts);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [sortFilter]);
 
     useEffect(() => {
         dispatch(setLoading(isFetching));
     }, [dispatch, isFetching]);
+
+    const handleGetMore = () => {
+        dispatch(changePage(filter.page + 1));
+    };
 
     const searchResultText = () => {
         const text = (
@@ -64,6 +62,7 @@ export const Catalog = withProtection(() => {
 
     const showNotFound = search && products?.length === 0 && !isFetching;
     const showSearchResultText = search && !isFetching;
+    const isEndList = productList?.length >= total;
 
     return (
         <>
@@ -71,7 +70,12 @@ export const Catalog = withProtection(() => {
             <SortFilter />
             {showNotFound && <NotFound />}
             {!!products && <ProductList products={productList} />}
-            {products?.length > 0 && <Pagination currentPage={filter.page} total={total} />}
+            {products?.length > 0 &&
+                (isGetListByPaginate ? (
+                    <Pagination currentPage={filter.page} total={total} />
+                ) : (
+                    !isFetching && <LoadMore action={handleGetMore} isEnd={isEndList} />
+                ))}
         </>
     );
 });

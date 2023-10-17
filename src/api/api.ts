@@ -11,8 +11,8 @@ const {
     get,
     patch,
     post,
-    put,
-    delete: deleteAxios,
+    // put,
+    // delete: deleteAxios,
 } = axios.create({
     baseURL: config.apiUrl,
     headers: {
@@ -31,27 +31,8 @@ export class Api {
     updateUserProfile = (userData: IUpdateUserRequest) =>
         patch<IUser>('/users/me', userData).then((response) => this.onAxiosResponse(response));
 
-    getProductList = ({search, page, perPage}: IClientFilter) =>
-        get<IProductsList>(`/products?page=${page}&limit=${perPage}&query=${search}`).then((response) =>
-            this.onAxiosResponse(response)
-        );
-
-    deleteProduct = (productId: string) =>
-        deleteAxios<IProduct>(`${config.apiUrl}/products/${productId}`).then((response) =>
-            this.onAxiosResponse(response)
-        );
-
-    getProductById = (productId: string) =>
-        get<IProduct>(`/products/${productId}`).then((response) => this.onAxiosResponse(response));
-
     addReview = (productId: string) =>
         post<IProduct>(`/products/review/${productId}`).then((response) => this.onAxiosResponse(response));
-
-    likeProduct = (productId: string) =>
-        put<IProduct>(`/products/likes/${productId}`).then((response) => this.onAxiosResponse(response));
-
-    unlikeProduct = (productId: string) =>
-        deleteAxios<IProduct>(`/products/likes/${productId}`).then((response) => this.onAxiosResponse(response));
 }
 
 export default new Api();
