@@ -7,13 +7,6 @@ import {getDefaultFilter} from 'Utils/utils';
 
 export const PRODUCT_LIST_SLICE_NAME = 'productsList';
 
-export const getProductsList = createAppAsyncThunk<IProductsList, IClientFilter>(
-    `${PRODUCT_LIST_SLICE_NAME}/getProductsList`,
-    async (filter: IClientFilter, {extra: api}) => {
-        return await api.getProductList(filter);
-    }
-);
-
 export const deleteProduct = createAppAsyncThunk<IProduct, string>(
     `${PRODUCT_LIST_SLICE_NAME}/deleteProduct`,
     async (productId: string, {extra: api}) => {
@@ -31,6 +24,7 @@ export const toggleLikeProduct = createAppAsyncThunk<IProduct, {productId: strin
 interface IProductsListData {
     productList: IProductsList;
     clientFilter: IClientFilter;
+    sortFilter: ESortFilter;
 }
 
 interface IProductsListState {
@@ -43,6 +37,7 @@ const initialState: IProductsListState = {
     data: {
         productList: null,
         clientFilter: getDefaultFilter(),
+        sortFilter: ESortFilter.POPULAR,
     },
     isLoading: false,
     error: null,
@@ -57,6 +52,9 @@ const productsListSlice = createSlice({
         },
         searchProducts: (state: IProductsListState, action: PayloadAction<string>) => {
             state.data.clientFilter.search = action.payload;
+        },
+        setSortFilter: (state: IProductsListState, action: PayloadAction<ESortFilter>) => {
+            state.data.sortFilter = action.payload;
         },
         sortProductsList: (state: IProductsListState, action: PayloadAction<ESortFilter>) => {
             if (!state.data.productList.products) return;
@@ -82,10 +80,6 @@ const productsListSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(getProductsList.fulfilled, (state: IProductsListState, action) => {
-                state.data.productList = action.payload;
-                state.isLoading = false;
-            })
             .addCase(toggleLikeProduct.fulfilled, (state: IProductsListState, action) => {
                 const newList = state.data.productList.products.map((product) => {
                     return product._id === action.payload._id ? action.payload : product;
@@ -105,5 +99,5 @@ const productsListSlice = createSlice({
     },
 });
 
-export const {changePage, searchProducts, sortProductsList} = productsListSlice.actions;
+export const {changePage, searchProducts, setSortFilter} = productsListSlice.actions;
 export default productsListSlice;

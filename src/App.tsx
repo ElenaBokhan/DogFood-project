@@ -7,7 +7,11 @@ import {ProductCard} from 'Pages/ProductCard/ProductCard';
 import {Profile} from 'Pages/Profile/Profile';
 import {Provider} from 'react-redux';
 import {RouterProvider, createBrowserRouter} from 'react-router-dom';
+import {ToastContainer} from 'react-toastify';
 import store from 'Store/configureStore';
+import 'react-toastify/dist/ReactToastify.css';
+import {SignUp} from 'Pages/SignUp/SignUp';
+import {SignIn} from 'Pages/SignIn/SignIn';
 
 const router = createBrowserRouter([
     {
@@ -32,6 +36,14 @@ const router = createBrowserRouter([
                 element: <Profile />,
             },
             {
+                path: '/signup',
+                element: <SignUp />,
+            },
+            {
+                path: '/signin',
+                element: <SignIn />,
+            },
+            {
                 path: '*',
                 element: <PageNotFound />,
             },
@@ -43,6 +55,7 @@ const App = () => {
     return (
         <Provider store={store}>
             <RouterProvider router={router} />
+            <ToastContainer autoClose={5000} position="top-right" theme="light" closeOnClick />
         </Provider>
     );
 };

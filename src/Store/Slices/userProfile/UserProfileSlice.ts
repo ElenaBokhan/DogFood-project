@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import type {SerializedError} from '@reduxjs/toolkit';
 import {IUpdateUserRequest} from 'api/api';
 import {createAppAsyncThunk} from 'Store/hooks';
@@ -35,7 +35,18 @@ const initialState: IUserProfileState = {
 const userProfileSlice = createSlice({
     name: USER_PROFILE_SLICE_NAME,
     initialState,
-    reducers: null,
+    reducers: {
+        setUserProfile(state, action: PayloadAction<IUser>) {
+            state.data = action.payload;
+        },
+        clearUserProfile() {
+            return {
+                data: null,
+                isLoading: false,
+                error: null,
+            };
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(getUserProfile.fulfilled, (state: IUserProfileState, action) => {
@@ -53,4 +64,5 @@ const userProfileSlice = createSlice({
     },
 });
 
+export const {setUserProfile, clearUserProfile} = userProfileSlice.actions;
 export default userProfileSlice;

@@ -2,8 +2,8 @@ import searchIcon from 'assets/ic-close-input.svg';
 import {IconButton} from 'Components/Common/IconButton/IconButton';
 import styles from 'Components/SearchForm/SearchForm.module.css';
 import React, {FormEvent, useState} from 'react';
-import {searchProducts} from 'Slices/productList/ProductListSlice';
 import {UseAppDispatch} from 'Store/hooks';
+import {searchProducts} from 'Store/Slices/productList/ProductListSlice';
 
 export const SearchForm = () => {
     const [filter, setFilter] = useState<string>('');

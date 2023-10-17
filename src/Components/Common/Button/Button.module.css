@@ -52,3 +52,14 @@
 .selected:hover {
     background: #ffe44d;
 }
+
+.disable {
+    background-color: #cfd8dc;
+    border: none;
+    cursor: default;
+}
+
+.disable:hover {
+    background-color: #cfd8dc;
+    border: none;
+}

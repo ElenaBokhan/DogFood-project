@@ -1,15 +1,15 @@
 import favouritesFillIcon from 'assets/ic-favorites-fill.svg';
 import favouritesIcon from 'assets/ic-favorites.svg';
 import trashIcon from 'assets/ic-trash.svg';
-import {Button, EButtonType} from 'Components/Common/Button/Button';
+import {Button, EButtonTheme} from 'Components/Common/Button/Button';
 import {Gap} from 'Components/Common/Gap/Gap';
 import {IconButton} from 'Components/Common/IconButton/IconButton';
 import {EFontColor, EFontWeight, ETextType, Text} from 'Components/Common/Text/Text';
 import styles from 'Components/ProductItem/ProductItem.module.css';
 import {Link, useLocation} from 'react-router-dom';
-import {toggleLikeProduct} from 'Slices/productList/ProductListSlice';
-import {selectUser} from 'Slices/userProfile/UserProfileSelectors';
 import {UseAppDispatch, UseAppSelector} from 'Store/hooks';
+import {toggleLikeProduct} from 'Store/Slices/productList/ProductListSlice';
+import {selectUser} from 'Store/Slices/userProfile/UserProfileSelectors';
 import {calculateOldPrice, isFavourite} from 'Utils/utils';
 
 interface IProductProps {
@@ -42,25 +42,23 @@ export const ProductItem = ({product}: IProductProps) => {
         );
     };
 
-    const renderTextContent = () => {
-        return (
-            <div className={styles.textContent}>
-                {!!discount && (
-                    <Text className={styles.oldPrice} type={ETextType.S1} value={calculateOldPrice(price, discount)} />
-                )}
-                <Text
-                    className={styles.price}
-                    fontColor={!!discount && EFontColor.RED}
-                    type={ETextType.H3}
-                    value={price}
-                    weight={EFontWeight.GENERAL}
-                />
-                <Gap size={6} />
-                <Text fontColor={EFontColor.GREY} type={ETextType.S1} value={wight} />
-                <Text value={name} />
-            </div>
-        );
-    };
+    const renderTextContent = () => (
+        <div className={styles.textContent}>
+            {!!discount && (
+                <Text className={styles.oldPrice} type={ETextType.S1} value={calculateOldPrice(price, discount)} />
+            )}
+            <Text
+                className={styles.price}
+                fontColor={!!discount && EFontColor.RED}
+                type={ETextType.H3}
+                value={price}
+                weight={EFontWeight.GENERAL}
+            />
+            <Gap size={6} />
+            <Text fontColor={EFontColor.GREY} type={ETextType.S1} value={wight} />
+            <Text value={name} />
+        </div>
+    );
 
     return (
         <div className={styles.productItem}>
@@ -71,7 +69,7 @@ export const ProductItem = ({product}: IProductProps) => {
                 <img alt={description} className={styles.pictures} height={'187px'} src={pictures} width={'236px'} />
             </Link>
             {renderTextContent()}
-            <Button label={'В корзину'} type={EButtonType.STANDARD} />
+            <Button label={'В корзину'} theme={EButtonTheme.STANDARD} />
         </div>
     );
 };

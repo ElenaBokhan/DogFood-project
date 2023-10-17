@@ -1,13 +1,21 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import api from 'api/api';
-import ProductSlice from 'Slices/product/ProductSlice';
-import ProductsListSlice from 'Slices/productList/ProductListSlice';
-import UserProfileSlice from 'Slices/userProfile/UserProfileSlice';
+import {authApi} from 'Store/Api/AuthApi';
+import ProductSlice from 'Store/Slices/product/ProductSlice';
+import ProductsListSlice from 'Store/Slices/productList/ProductListSlice';
+import UserProfileSlice from 'Store/Slices/userProfile/UserProfileSlice';
+import LoadingSlice from 'Store/Slices/loading/Loading';
+import AuthSlice from 'Store/Slices/Auth/AuthSlice';
+import {productListApi} from 'Store/Api/productListApi';
 
 const rootReducer = combineReducers({
     [UserProfileSlice.name]: UserProfileSlice.reducer,
     [ProductsListSlice.name]: ProductsListSlice.reducer,
     [ProductSlice.name]: ProductSlice.reducer,
+    [AuthSlice.name]: AuthSlice.reducer,
+    [LoadingSlice.name]: LoadingSlice.reducer,
+    [authApi.reducerPath]: authApi.reducer,
+    [productListApi.reducerPath]: productListApi.reducer,
 });
 
 const store = configureStore({
@@ -18,7 +26,9 @@ const store = configureStore({
             thunk: {
                 extraArgument: api,
             },
-        }),
+        })
+            .concat(authApi.middleware)
+            .concat(productListApi.middleware),
 });
 
 export type TRootState = ReturnType<typeof rootReducer>;

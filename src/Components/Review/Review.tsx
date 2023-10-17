@@ -2,6 +2,7 @@ import starFillIcon from 'assets/ic-star-fill.svg';
 import starIcon from 'assets/ic-star.svg';
 import {Text} from 'Components/Common/Text/Text';
 import styles from 'Components/Pagination/Pagination.module.css';
+import {dateFormatter} from 'Utils/utils';
 
 interface IReviewProps {
     review: IReview;
@@ -19,7 +20,7 @@ export const Review = ({review}: IReviewProps) => {
     return (
         <div className={styles}>
             <Text value={author.name} />
-            <Text value={created_at} />
+            <Text value={dateFormatter.format(new Date(created_at))} />
             {renderStars()}
             <Text value={text} />
         </div>

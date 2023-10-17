@@ -2,8 +2,8 @@ import cn from 'classnames';
 import styles from 'Components/Common/Container/Container.module.css';
 import {Loader} from 'Components/Common/Loader/Loader';
 import React from 'react';
-import {selectProductList} from 'Slices/productList/ProductListSelectors';
 import {UseAppSelector} from 'Store/hooks';
+import {loadingSelector} from 'Store/Slices/loading/LoadingSelectors';
 
 interface IContainerProps {
     className?: string;
@@ -17,11 +17,9 @@ export enum EContainerType {
 }
 
 const Container: React.FC<IContainerProps> = ({children, type, className}: IContainerProps) => {
-    const {isLoading} = UseAppSelector(selectProductList);
+    const isLoading = UseAppSelector(loadingSelector);
 
-    const getContent = () => {
-        return <div className={cn(styles.container, className)}>{children}</div>;
-    };
+    const getContent = () => <div className={cn(styles.container, className)}>{children}</div>;
 
     const getContainer = () => {
         switch (type) {

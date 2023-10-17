@@ -13,8 +13,8 @@ export const NotFound = () => {
 
     const notFoundConfig = {
         [ENotFoundPlacement.CATALOG]: {
-            title: 'Простите, по вашему запросу товаров не надено.',
-            subtitle: null as string,
+            title: 'Простите, по вашему запросу товаров не найдено.',
+            subtitle: '',
         },
         [ENotFoundPlacement.FAVOURITES]: {
             title: 'В Избранном пока ничего нет',
@@ -24,14 +24,14 @@ export const NotFound = () => {
 
     const renderTitle = () => {
         const placement = state.pathname === '/' ? ENotFoundPlacement.CATALOG : ENotFoundPlacement.FAVOURITES;
+        const {title, subtitle} = notFoundConfig[placement];
 
         return (
             <>
-                <Text type={ETextType.P1} value={notFoundConfig[placement].title} weight={EFontWeight.GENERAL} />
-                <Text
-                    className={placement === ENotFoundPlacement.FAVOURITES && styles.heart}
-                    value={notFoundConfig[placement].subtitle}
-                />
+                <Text type={ETextType.P1} value={title} weight={EFontWeight.GENERAL} />
+                {!!subtitle && (
+                    <Text className={placement === ENotFoundPlacement.FAVOURITES && styles.heart} value={subtitle} />
+                )}
             </>
         );
     };
