@@ -52,12 +52,9 @@ export const SignUpForm = () => {
     );
 
     const onSubmit: SubmitHandler<TFormSignUpData> = async (data) => {
-        // eslint-disable-next-line no-useless-catch
         try {
             await signUpRequest(data).unwrap();
             redirectToSignIn();
-            // const response = await getResponse(1e3);
-            console.log({data});
             toast.success('Вы успешно зарегистрированы');
         } catch (e) {
             toast.error(getMessageFromError(e, 'Неизвестная ошибка'));
