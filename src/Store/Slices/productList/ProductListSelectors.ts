@@ -7,3 +7,4 @@ export const selectProductList = (state: TRootState) => ({
 });
 
 export const selectFilter = (state: TRootState) => state.productsList.data?.clientFilter;
+export const selectSortFilter = (state: TRootState) => state.productsList.data?.sortFilter;

@@ -1,36 +1,45 @@
 import cartIcon from 'assets/ic-cart.svg';
 import profileIcon from 'assets/ic-profile.svg';
 import Logo from 'assets/Logo.svg';
+import logOut from 'assets/log-out.svg';
 import favouritesIcon from 'assets/profile-favorites.svg';
 import HeaderContainer, {EContainerType} from 'Components/Common/Container/Container';
 import styles from 'Components/Header/Header.module.css';
 import {SearchForm} from 'Components/SearchForm/SearchForm';
-import {Link, useLocation} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
+import {IconButton} from 'Components/Common/IconButton/IconButton';
+import {UseAppDispatch} from 'Store/hooks';
+import {clearTokens} from 'Store/Slices/Auth/AuthSlice';
 
 export const Header = () => {
-    const {state} = useLocation();
+    const navigate = useNavigate();
+    const dispatch = UseAppDispatch();
 
-    const renderLogo = () => {
-        return (
-            <div className={styles.logo}>
-                <img alt="headerLogo" src={Logo} />
-            </div>
-        );
+    const renderLogo = () => (
+        <div className={styles.logo}>
+            <img src={Logo} alt="logoMain" />
+        </div>
+    );
+
+    const redirect = (path: string) => () => navigate(path);
+
+    const handleLogOut = () => {
+        dispatch(clearTokens);
+        navigate('/signin');
     };
 
     const renderHeaderProfileIcons = () => {
         const headerIconConfig = [
-            {name: favouritesIcon, path: '/favourites'},
-            {name: cartIcon, path: '/cart'},
-            {name: profileIcon, path: '/profile'},
+            {name: favouritesIcon, onClick: redirect('/favourites')},
+            {name: cartIcon, onClick: redirect('/cart')},
+            {name: profileIcon, onClick: redirect('/profile')},
+            {name: logOut, onClick: handleLogOut},
         ];
 
         return (
             <div className={styles.profilesIcons}>
-                {headerIconConfig.map(({name, path}) => (
-                    <Link key={path} state={state} to={path}>
-                        <img alt="profileIcon" src={name} />
-                    </Link>
+                {headerIconConfig.map(({name, onClick}, index) => (
+                    <IconButton key={index} icon={name} onClick={onClick} alt="headerIcon" />
                 ))}
             </div>
         );

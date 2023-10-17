@@ -1,0 +1,26 @@
+.modal-container {
+    display: flex;
+    width: 420px;
+    padding: 32px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: 0 20px 32px 0 rgb(96 97 112 / 24%), 0 2px 8px 0 rgb(40 41 61 / 8%);
+}
+
+.inputs-container {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    width: 100%;
+}
+
+.buttons-container {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    width: 100%;
+}

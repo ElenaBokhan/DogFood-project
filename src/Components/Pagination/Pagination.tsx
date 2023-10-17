@@ -1,10 +1,10 @@
 import arrowPrev from 'assets/ic-left-arrow.svg';
 import arrowNext from 'assets/ic-right-arrow.svg';
-import {Button, EButtonType} from 'Components/Common/Button/Button';
+import {Button, EButtonTheme} from 'Components/Common/Button/Button';
 import styles from 'Components/Pagination/Pagination.module.css';
 import {PER_PAGE} from 'Const';
-import {changePage} from 'Slices/productList/ProductListSlice';
 import {UseAppDispatch} from 'Store/hooks';
+import {changePage} from 'Store/Slices/productList/ProductListSlice';
 
 interface IPaginationProps {
     currentPage: number;
@@ -49,12 +49,12 @@ export const Pagination = ({currentPage, total}: IPaginationProps) => {
 
         const labelButton = (
             <>
-                <img src={icon} />
+                <img src={icon} alt="arrowIcon" />
                 <span>{label}</span>
             </>
         );
 
-        return <Button disable={disable} label={labelButton} onChange={onChange} type={EButtonType.REDIRECT} />;
+        return <Button disable={disable} label={labelButton} onChange={onChange} theme={EButtonTheme.REDIRECT} />;
     };
 
     const renderPageItems = () => {
@@ -98,7 +98,7 @@ export const Pagination = ({currentPage, total}: IPaginationProps) => {
                         key={index}
                         label={item}
                         onChange={item === dotsPage ? handleDotsPage : handlePageItemsClick}
-                        type={EButtonType.PAGINATION}
+                        theme={EButtonTheme.PAGINATION}
                     />
                 ))}
             </div>

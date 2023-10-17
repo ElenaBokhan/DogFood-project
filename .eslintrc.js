@@ -1,10 +1,3 @@
-const eslintRules = require('./webpack/eslintRules/rules/1-eslint');
-const importRules = require('./webpack/eslintRules/rules/2-import');
-const reactRules = require('./webpack/eslintRules/rules/3-react');
-const reactJSXRules = require('./webpack/eslintRules/rules/4-react-jsx');
-const typescriptRules = require('./webpack/eslintRules/rules/6-typescript');
-const a11yRules = require('./webpack/eslintRules/rules/7-jsx-a11y');
-
 module.exports = {
     env: {
         browser: true,
@@ -14,12 +7,16 @@ module.exports = {
     parser: '@typescript-eslint/parser',
 
     extends: [
-        'eslint:recommended',
-        'plugin:import/recommended',
-        'plugin:react/recommended',
-        'plugin:@typescript-eslint/eslint-recommended',
         'plugin:@typescript-eslint/recommended',
         'plugin:prettier/recommended',
+        'prettier',
+        'plugin:react/recommended',
+        'plugin:react-hooks/recommended',
+        'plugin:import/errors',
+        'plugin:import/warnings',
+        'plugin:import/typescript',
+        'plugin:jsx-a11y/recommended',
+        'plugin:eslint-comments/recommended',
     ],
     parserOptions: {
         ecmaFeatures: {
@@ -27,50 +24,28 @@ module.exports = {
             jsx: true,
         },
         sourceType: 'module',
+        warnOnUnsupportedTypeScriptVersion: false,
     },
     plugins: ['react', 'eslint-plugin-import-helpers'],
 
     settings: {
         'import/resolver': {
-            node: {extensions: ['.js', '.jsx', '.ts', '.tsx']},
+            node: {
+                paths: ['src'],
+                extensions: ['.js', '.jsx', '.ts', '.tsx'],
+            },
         },
     },
 
     rules: {
-        // Правила ESLint.
-        ...eslintRules,
-
-        // // // Правила импортов.
-        ...importRules,
-
-        // // Правила React.
-        ...reactRules,
-
-        // // Правила React JSX.
-        ...reactJSXRules,
-
-        // Правила TypeScript.
-        ...typescriptRules,
-
-        // Правила JSX a11y.
-        ...a11yRules,
-
-        'import-helpers/order-imports': [
-            'warn',
-            {
-                // example configuration
-                newlinesBetween: 'always',
-                groups: ['module', '/^@shared/', ['parent', 'sibling', 'index']],
-                alphabetize: {order: 'asc', ignoreCase: true},
-            },
-        ],
-        // Правила Prettier.
-        '@typescript-eslint/no-unused-vars': 'off',
-        'no-empty-function': 'warn',
-        'prettier/prettier': 'error',
-        'arrow-body-style': 'off',
-        'prefer-arrow-callback': 'off',
+        semi: [2, 'always'],
+        quotes: [2, 'single', { avoidEscape: true }],
+        'no-unused-vars': 'off',
+        '@typescript-eslint/no-unused-vars': ['error'],
+        '@typescript-eslint/no-var-requires': 'off',
+        'react/prop-types': 'off',
+        'react/jsx-uses-react': 'off',
         'react/react-in-jsx-scope': 'off',
-        'react/jsx-no-bind': ['error', {ignoreDOMComponents: true, allowArrowFunctions: true}],
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
     },
 };

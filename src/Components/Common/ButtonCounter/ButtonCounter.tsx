@@ -6,14 +6,12 @@ interface IButtonCounterProps {
     onIncrease: () => void;
 }
 
-export const ButtonCounter = ({count, onDecrease, onIncrease}: IButtonCounterProps) => {
-    return (
-        <div className={styles.buttonConteiner}>
-            <button disabled={count === 0} onClick={onDecrease}>
-                -
-            </button>
-            <span>{count}</span>
-            <button onClick={onIncrease}>+</button>
-        </div>
-    );
-};
+export const ButtonCounter = ({count, onDecrease, onIncrease}: IButtonCounterProps) => (
+    <div className={styles.buttonConteiner}>
+        <button disabled={count === 0} onClick={onDecrease}>
+            -
+        </button>
+        <span>{count}</span>
+        <button onClick={onIncrease}>+</button>
+    </div>
+);

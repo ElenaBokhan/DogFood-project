@@ -6,11 +6,9 @@ interface ITitleProps {
     pathName?: string;
 }
 
-export const TitlePage = ({label, pathName}: ITitleProps) => {
-    return (
-        <>
-            <Breadcrumbs pathName={pathName} />
-            <Text type={ETextType.H1} value={label} />
-        </>
-    );
-};
+export const TitlePage = ({label, pathName}: ITitleProps) => (
+    <>
+        <Breadcrumbs pathName={pathName} />
+        <Text type={ETextType.H1} value={label} />
+    </>
+);

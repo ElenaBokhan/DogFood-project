@@ -1,11 +1,11 @@
 import mailIcon from 'assets/ic-mail.svg';
 import phoneIcon from 'assets/ic-phone.svg';
-import {Button, EButtonType} from 'Components/Common/Button/Button';
+import {Button, EButtonTheme} from 'Components/Common/Button/Button';
 import {EFontColor, ETextType, Text} from 'Components/Common/Text/Text';
 import {TitlePage} from 'Components/Common/TitlePage/TitlePage';
 import styles from 'Pages/Profile/Profile.module.css';
-import {selectUser} from 'Slices/userProfile/UserProfileSelectors';
 import {UseAppSelector} from 'Store/hooks';
+import {selectUser} from 'Store/Slices/userProfile/UserProfileSelectors';
 
 export const Profile = () => {
     const {name, email} = UseAppSelector(selectUser);
@@ -13,8 +13,8 @@ export const Profile = () => {
     const renderButtonBlock = () => {
         return (
             <div className={styles.buttons}>
-                <Button label={'Изменить'} type={EButtonType.REDIRECT} />
-                <Button label={'Выйти'} type={EButtonType.REDIRECT} />
+                <Button label={'Изменить'} theme={EButtonTheme.REDIRECT} />
+                <Button label={'Выйти'} theme={EButtonTheme.REDIRECT} />
             </div>
         );
     };
