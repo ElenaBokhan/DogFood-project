@@ -3,33 +3,46 @@ import favouritesIcon from 'assets/ic-favorites.svg';
 import searchIcon from 'assets/ic-search.svg';
 import {Button, EButtonTheme} from 'Components/Common/Button/Button';
 import {IconButton} from 'Components/Common/IconButton/IconButton';
-import {EFontColor, EFontWeight, ETextType, Text} from 'Components/Common/Text/Text';
+import {Price} from 'Components/Common/Price/Price';
+import {EFontColor, ETextType, Text} from 'Components/Common/Text/Text';
 import {TitlePage} from 'Components/Common/TitlePage/TitlePage';
+import {DeliveryPlaceholder} from 'Components/Placeholders/Delivery';
+import {QualityPlaceholder} from 'Components/Placeholders/Quality';
+import {ProductPopup} from 'Components/ProductPopup/ProductPopup';
 import {Review} from 'Components/Review/Review';
+import {useActions} from 'hooks/hooks';
 import {BusketSelector} from 'Pages/ProductCard/BusketSelector';
 import styles from 'Pages/ProductCard/ProductCard.module.css';
+import {useState} from 'react';
 import {useLocation, useParams} from 'react-router-dom';
 import {useProductQuery} from 'Store/Api/productListApi';
 import {UseAppSelector} from 'Store/hooks';
-import {selectUser} from 'Store/Slices/userProfile/UserProfileSelectors';
-import {calculateOldPrice, isFavourite} from 'Utils/utils';
+import {selectIsFavourite} from 'Store/Slices/favourites/FavouritesSelector';
 
 export const ProductCard = () => {
     const {state} = useLocation();
     const {productId} = useParams();
 
-    const {data, isFetching} = useProductQuery(productId);
-    const userProfile = UseAppSelector(selectUser);
-    const {name, price, discount, description, likes, pictures, reviews} = data || {};
+    const {data} = useProductQuery(productId);
+    const {name, price, discount, description, pictures, reviews, stock, _id} = data || {};
+    const isFavourite = UseAppSelector(selectIsFavourite(_id));
+    const {addToFavourites, removeFromFavourites} = useActions();
+    const [openPopup, setOpenPopup] = useState<boolean>(false);
 
-    const isLiked = !isFetching && data && isFavourite(likes, userProfile?._id);
+    const handleTogglePopup = () => {
+        setOpenPopup(!openPopup);
+    };
+
+    const handleToggleProductToFavourites = () => {
+        isFavourite ? removeFromFavourites(_id) : addToFavourites(data);
+    };
 
     const renderAddToFavouriteButton = () => {
-        const labelButton = isLiked ? 'Удалить из избранного' : 'В избранное';
+        const labelButton = isFavourite ? 'Удалить из избранного' : 'В избранное';
 
         return (
-            <button className={styles.toFavourites}>
-                <img alt="favourites" src={isLiked ? favouritesFillIcon : favouritesIcon} />
+            <button className={styles.toFavourites} onClick={handleToggleProductToFavourites}>
+                <img alt="favourites" src={isFavourite ? favouritesFillIcon : favouritesIcon} />
                 <Text fontColor={EFontColor.GREY} type={ETextType.P2} value={labelButton} />
             </button>
         );
@@ -37,30 +50,22 @@ export const ProductCard = () => {
 
     const renderProductMain = () => (
         <div className={styles.productMain}>
-            <div>
+            <div className={styles.productImage}>
                 {!!discount && <div className={styles.discount}>{discount + ' %'}</div>}
                 <img alt={description} className={styles.pictures} src={pictures} width={'488px'} />
-                <IconButton alt={'searchIcon'} icon={searchIcon} />
+                <IconButton
+                    onClick={handleTogglePopup}
+                    className={styles.searchIcon}
+                    alt={'searchIcon'}
+                    icon={searchIcon}
+                />
             </div>
             <div className={styles.productMainInfo}>
-                <div className={styles.priceConteiner}>
-                    {!!discount && (
-                        <Text
-                            className={styles.oldPrice}
-                            type={ETextType.S1}
-                            value={calculateOldPrice(price, discount)}
-                        />
-                    )}
-                    <Text
-                        className={styles.price}
-                        fontColor={discount && EFontColor.RED}
-                        type={ETextType.H3}
-                        value={price}
-                        weight={EFontWeight.GENERAL}
-                    />
-                </div>
-                <BusketSelector />
+                <Price price={price} discount={discount} />
+                <BusketSelector stock={stock} product={data} />
                 {renderAddToFavouriteButton()}
+                <DeliveryPlaceholder />
+                <QualityPlaceholder />
             </div>
         </div>
     );
@@ -92,11 +97,13 @@ export const ProductCard = () => {
         <div className={styles.productCard}>
             {data && (
                 <>
-                    <TitlePage label={name} pathName={state.pathname} />
+                    <TitlePage label={name} pathName={state?.pathname} />
                     {renderProductMain()}
                     {renderDescription()}
                     {renderSpecifications()}
                     {renderReviews()}
+                    {openPopup && <ProductPopup onClose={handleTogglePopup} pictures={pictures} name={name} />}
+
                     <Button label={'Все отзывы'} theme={EButtonTheme.REDIRECT} />
                 </>
             )}

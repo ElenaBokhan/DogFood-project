@@ -10,15 +10,13 @@ import {useSignInMutation} from 'Store/Api/AuthApi';
 import {getMessageFromError} from 'Utils/errorUtils';
 import {TFormSignInData} from 'Components/Forms/Helpers/types';
 import {useLocation, useNavigate} from 'react-router-dom';
-import {setUserProfile} from 'Store/Slices/userProfile/UserProfileSlice';
-import {UseAppDispatch} from 'Store/hooks';
 import {objectHasProperty} from 'Utils/utils';
-import {setAccessToken} from 'Store/Slices/Auth/AuthSlice';
+import {useActions} from 'hooks/hooks';
 
 export const SignInForm = () => {
     const [signInRequest] = useSignInMutation();
     const navigate = useNavigate();
-    const dispatch = UseAppDispatch();
+    const {setAccessToken, setUserProfile} = useActions();
     const {state} = useLocation();
 
     const {
@@ -60,8 +58,8 @@ export const SignInForm = () => {
     const onSubmit: SubmitHandler<TFormSignInData> = async (value) => {
         try {
             const {data, token} = await signInRequest(value).unwrap();
-            dispatch(setAccessToken(token));
-            dispatch(setUserProfile(data));
+            setAccessToken(token);
+            setUserProfile(data);
             redirect();
             toast.success('Вы успешно зарегистрированы');
         } catch (e) {

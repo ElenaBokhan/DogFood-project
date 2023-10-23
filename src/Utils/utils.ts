@@ -1,8 +1,12 @@
 import {PER_PAGE} from 'Const';
 import {ESortFilter} from 'Store/Slices/productList/ProductListSlice';
 
-export const calculateOldPrice = (price: number, discount: number) => {
-    return Math.floor(price - (price * discount) / 100);
+export const calculateUndiscountedPrice = (price: number, discount: number) => {
+    return Math.floor(price + (price * discount) / 100);
+};
+
+export const getUndiscountedPrice = (price: number, discount: number) => {
+    return discount ? calculateUndiscountedPrice(price, discount) : price;
 };
 
 export const isFavourite = (likes: string[], id: string) => {

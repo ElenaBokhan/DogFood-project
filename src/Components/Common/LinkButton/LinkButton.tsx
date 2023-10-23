@@ -1,5 +1,4 @@
 import {Button, EButtonTheme} from 'Components/Common/Button/Button';
-import styles from 'Components/Common/LinkButton/LinkButton.module.css';
 import {Link} from 'react-router-dom';
 
 interface ILinkButtonProps {
@@ -8,7 +7,7 @@ interface ILinkButtonProps {
 }
 
 export const LinkButton = ({path, label}: ILinkButtonProps) => (
-    <Link className={styles.link} to={path}>
+    <Link to={path}>
         <Button label={label} theme={EButtonTheme.REDIRECT} />
     </Link>
 );
