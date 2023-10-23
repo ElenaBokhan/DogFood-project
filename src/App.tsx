@@ -12,6 +12,7 @@ import store from 'Store/configureStore';
 import 'react-toastify/dist/ReactToastify.css';
 import {SignUp} from 'Pages/SignUp/SignUp';
 import {SignIn} from 'Pages/SignIn/SignIn';
+import {Cart} from 'Pages/Cart/Cart';
 
 const router = createBrowserRouter([
     {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
             {
                 path: '/signin',
                 element: <SignIn />,
+            },
+            {
+                path: '/cart',
+                element: <Cart />,
             },
             {
                 path: '*',

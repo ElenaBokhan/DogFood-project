@@ -2,13 +2,16 @@ import arrowDown from 'assets/ic-down-arrow.svg';
 import {Button, EButtonTheme} from 'Components/Common/Button/Button';
 import {NotFound} from 'Components/Common/NotFound/NotFound';
 import {TitlePage} from 'Components/Common/TitlePage/TitlePage';
-import {ProductItem} from 'Components/ProductItem/ProductItem';
+import {ProductList} from 'Components/ProductList/ProductList';
+import {PER_PAGE} from 'Const';
 import style from 'Pages/Favourites/Favourites.module.css';
+import {UseAppSelector} from 'Store/hooks';
+import {selectFavourites} from 'Store/Slices/favourites/FavouritesSelector';
 
 export const Favourites = () => {
-    const products: IProduct[] = [];
+    const favourites = UseAppSelector(selectFavourites);
 
-    const renderButton = () => {
+    const showMoreButton = () => {
         const labelButton = (
             <>
                 <span>{'Показать еще'}</span>
@@ -22,13 +25,11 @@ export const Favourites = () => {
     return (
         <div className={style.favourites}>
             <TitlePage label={'Избранное'} />
-            {products.length > 0 ? (
-                <>
-                    {products.map((product, index) => (
-                        <ProductItem key={index} product={product} />
-                    ))}
-                    {renderButton()}
-                </>
+            {favourites.length > 0 ? (
+                <div className={style.favouritesList}>
+                    <ProductList products={favourites} />
+                    {favourites.length > PER_PAGE && showMoreButton()}
+                </div>
             ) : (
                 <NotFound />
             )}

@@ -41,20 +41,6 @@ declare global {
         created_at?: string;
         rating: number;
     }
-    interface Post {
-        image: string;
-        likes: string[];
-        comments: IReview[];
-        tags: string[];
-        isPublished?: boolean;
-        _id: string;
-        title: string;
-        author: IUser;
-        text: string;
-        created_at?: string;
-        updated_at?: string;
-        __v?: number;
-    }
 
     interface IUser {
         name: string;

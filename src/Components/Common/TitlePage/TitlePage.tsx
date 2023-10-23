@@ -7,8 +7,8 @@ interface ITitleProps {
 }
 
 export const TitlePage = ({label, pathName}: ITitleProps) => (
-    <>
+    <div>
         <Breadcrumbs pathName={pathName} />
         <Text type={ETextType.H1} value={label} />
-    </>
+    </div>
 );

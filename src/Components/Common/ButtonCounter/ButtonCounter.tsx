@@ -4,14 +4,17 @@ interface IButtonCounterProps {
     count: number;
     onDecrease: () => void;
     onIncrease: () => void;
+    max: number;
 }
 
-export const ButtonCounter = ({count, onDecrease, onIncrease}: IButtonCounterProps) => (
+export const ButtonCounter = ({count = 0, onDecrease, onIncrease, max}: IButtonCounterProps) => (
     <div className={styles.buttonConteiner}>
         <button disabled={count === 0} onClick={onDecrease}>
-            -
+            –
         </button>
         <span>{count}</span>
-        <button onClick={onIncrease}>+</button>
+        <button disabled={count === max} onClick={onIncrease}>
+            +
+        </button>
     </div>
 );
