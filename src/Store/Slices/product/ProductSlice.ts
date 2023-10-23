@@ -5,20 +5,6 @@ import {isActionPending, isActionRejected} from 'Utils/reduxUtils';
 
 export const PRODUCT_SLICE_NAME = 'product';
 
-export const getProduct = createAppAsyncThunk<IProduct, string>(
-    `${PRODUCT_SLICE_NAME}/getProduct`,
-    async (productId: string, {extra: api}) => {
-        return await api.getProductById(productId);
-    }
-);
-
-export const toggleLikeProductCard = createAppAsyncThunk<IProduct, {productId: string; isLiked: boolean}>(
-    `${PRODUCT_SLICE_NAME}/likeProduct`,
-    async ({productId, isLiked}, {extra: api}) => {
-        return isLiked ? await api.unlikeProduct(productId) : await api.likeProduct(productId);
-    }
-);
-
 export const addReview = createAppAsyncThunk<IReview, string>(
     `${PRODUCT_SLICE_NAME}/addReview`,
     async (productId: string, {extra: api}) => {
@@ -44,14 +30,6 @@ const productSlice = createSlice({
     reducers: null,
     extraReducers: (builder) => {
         builder
-            .addCase(getProduct.fulfilled, (state: IProductState, action) => {
-                state.data = action.payload;
-                state.isLoading = false;
-            })
-            .addCase(toggleLikeProductCard.fulfilled, (state: IProductState, action) => {
-                state.data = action.payload;
-                state.isLoading = false;
-            })
             .addMatcher(isActionRejected(PRODUCT_SLICE_NAME), (state: IProductState, action) => {
                 state.error = action.payload;
                 state.isLoading = false;

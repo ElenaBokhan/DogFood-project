@@ -54,12 +54,13 @@
 }
 
 .disable {
-    background-color: #cfd8dc;
-    border: none;
+    border: 1px solid  #cfd8dc;
+    background: none;
+    color: #cfd8dc;
     cursor: default;
 }
 
 .disable:hover {
-    background-color: #cfd8dc;
-    border: none;
+    background: none;
+    border: 1px solid  #cfd8dc;
 }

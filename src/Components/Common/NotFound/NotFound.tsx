@@ -29,7 +29,7 @@ export const NotFound = () => {
         return (
             <>
                 <Text type={ETextType.P1} value={title} weight={EFontWeight.GENERAL} />
-                {!!subtitle && (
+                {subtitle && (
                     <Text className={placement === ENotFoundPlacement.FAVOURITES && styles.heart} value={subtitle} />
                 )}
             </>

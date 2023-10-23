@@ -8,38 +8,27 @@ import {TitlePage} from 'Components/Common/TitlePage/TitlePage';
 import {Review} from 'Components/Review/Review';
 import {BusketSelector} from 'Pages/ProductCard/BusketSelector';
 import styles from 'Pages/ProductCard/ProductCard.module.css';
-import {useEffect} from 'react';
 import {useLocation, useParams} from 'react-router-dom';
-import {UseAppDispatch, UseAppSelector} from 'Store/hooks';
-import {selectProduct} from 'Store/Slices/product/ProductSelectors';
-import {getProduct, toggleLikeProductCard} from 'Store/Slices/product/ProductSlice';
+import {useProductQuery} from 'Store/Api/productListApi';
+import {UseAppSelector} from 'Store/hooks';
 import {selectUser} from 'Store/Slices/userProfile/UserProfileSelectors';
 import {calculateOldPrice, isFavourite} from 'Utils/utils';
 
 export const ProductCard = () => {
     const {state} = useLocation();
     const {productId} = useParams();
-    const dispatch = UseAppDispatch();
 
+    const {data, isFetching} = useProductQuery(productId);
     const userProfile = UseAppSelector(selectUser);
-    const {data, isLoading} = UseAppSelector(selectProduct);
-    const {name, price, discount, description, likes, _id, pictures, reviews} = data || {};
+    const {name, price, discount, description, likes, pictures, reviews} = data || {};
 
-    const isLiked = !isLoading && data && isFavourite(likes, userProfile?._id);
-
-    useEffect(() => {
-        dispatch(getProduct(productId));
-    }, []);
-
-    const handleToggleLikeProduct = () => {
-        dispatch(toggleLikeProductCard({productId: _id, isLiked}));
-    };
+    const isLiked = !isFetching && data && isFavourite(likes, userProfile?._id);
 
     const renderAddToFavouriteButton = () => {
         const labelButton = isLiked ? 'Удалить из избранного' : 'В избранное';
 
         return (
-            <button className={styles.toFavourites} onClick={handleToggleLikeProduct}>
+            <button className={styles.toFavourites}>
                 <img alt="favourites" src={isLiked ? favouritesFillIcon : favouritesIcon} />
                 <Text fontColor={EFontColor.GREY} type={ETextType.P2} value={labelButton} />
             </button>

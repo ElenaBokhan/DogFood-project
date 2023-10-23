@@ -7,8 +7,8 @@ import {IconButton} from 'Components/Common/IconButton/IconButton';
 import {EFontColor, EFontWeight, ETextType, Text} from 'Components/Common/Text/Text';
 import styles from 'Components/ProductItem/ProductItem.module.css';
 import {Link, useLocation} from 'react-router-dom';
-import {UseAppDispatch, UseAppSelector} from 'Store/hooks';
-import {toggleLikeProduct} from 'Store/Slices/productList/ProductListSlice';
+import {useToggleLikeProductMutation} from 'Store/Api/productListApi';
+import {UseAppSelector} from 'Store/hooks';
 import {selectUser} from 'Store/Slices/userProfile/UserProfileSelectors';
 import {calculateOldPrice, isFavourite} from 'Utils/utils';
 
@@ -20,13 +20,14 @@ export const ProductItem = ({product}: IProductProps) => {
     const {name, price, discount, wight, description, likes, pictures, _id} = product;
 
     const state = useLocation();
-    const dispatch = UseAppDispatch();
     const userProfile = UseAppSelector(selectUser);
+    const [toggleLikeProduct] = useToggleLikeProductMutation();
+
     const isCatalogPage = () => state.pathname === '/';
     const isLiked = isFavourite(likes, userProfile._id);
 
     const handleToggleLikeProduct = () => {
-        dispatch(toggleLikeProduct({productId: _id, isLiked: isLiked}));
+        toggleLikeProduct({productId: _id, isLiked: isLiked});
     };
 
     const getIconProductItem = () => {
