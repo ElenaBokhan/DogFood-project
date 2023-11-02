@@ -4,10 +4,26 @@
     align-items: center;
     gap: 80px;
     height: 80px;
+    justify-content: space-between;
 }
 
 .profiles-icons {
     display: flex;
     width: 140px;
     justify-content: space-between;
+}
+
+.profilesIcon {
+    position: relative;
+}
+
+.babl {
+    position: absolute;
+    right: -4px;
+    top: -2px;
+    padding: 2px 5px;
+    background-color: #01A54E;
+    color: white;
+    border-radius: 50%;
+    font-size: 9px;
 }

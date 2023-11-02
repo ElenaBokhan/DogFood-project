@@ -1,6 +1,6 @@
 .button-conteiner {
     display: flex;
-    padding: 12px 18px;
+    padding: 0 8px;
     justify-content: center;
     align-items: center;
     gap: 12px;
@@ -11,4 +11,7 @@
 .button-conteiner button {
     background: none;
     border: none;
+    cursor: pointer;
+    padding: 12px;
+    font-size: 20px;
 }

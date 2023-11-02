@@ -2,8 +2,7 @@ import {useSearchParams} from 'react-router-dom';
 import {useEffect, useState} from 'react';
 import {SEARCH_PARAMS_KEY} from 'Components/SearchForm/SearchForm';
 import {useDebounce} from 'hooks/useDebounce';
-import {UseAppDispatch} from 'Store/hooks';
-import {searchProducts} from 'Store/Slices/productList/ProductListSlice';
+import {useActions} from 'hooks/hooks';
 
 export const useSearchForm = () => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -11,13 +10,13 @@ export const useSearchForm = () => {
     const [localSearchValue, setLocalSearchValue] = useState(() => {
         return searchParams.get(SEARCH_PARAMS_KEY) || '';
     });
-    const dispatch = UseAppDispatch();
+    const {searchProducts} = useActions();
 
     const debouncedValue = useDebounce({value: localSearchValue, delay: 1e3});
 
     useEffect(() => {
-        dispatch(searchProducts(debouncedValue as string));
-    }, [debouncedValue, dispatch]);
+        searchProducts(debouncedValue as string);
+    }, [debouncedValue, searchProducts]);
 
     useEffect(() => {
         if (localSearchValue) {

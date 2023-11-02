@@ -1,6 +1,7 @@
 .product-card {
     display: flex;
     flex-direction: column;
+    gap: 40px;
 }
 
 .product-main {
@@ -16,7 +17,9 @@
     gap: 5px;
     cursor: pointer;
 }
-
+.productImage {
+    position: relative;
+}
 .discount {
     position: absolute;
     display: inline-flex;
@@ -30,6 +33,11 @@
 
 .pictures {
     object-fit: contain;
+}
+
+.searchIcon {
+    position: absolute;
+    bottom: 0;
 }
 
 .old-price {
@@ -63,7 +71,3 @@
     gap: 10px;
 }
 
-.price-conteiner {
-    position: relative;
-    padding-top: 16px;
-}

@@ -1,0 +1,15 @@
+.placeholder {
+    display: flex;
+    padding: 12px;
+    align-items: flex-start;
+    gap: 12px;
+    align-self: stretch;
+    border-radius: 12px;
+    background: rgba(236, 239, 241, 0.50);   
+}
+
+.deliveryPrice{
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+}

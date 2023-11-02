@@ -33,7 +33,6 @@ export const Catalog = withProtection(() => {
     useEffect(() => {
         const sortingProducts = getSortingProducts(productList, sortFilter);
         setProductList(sortingProducts);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [sortFilter]);
 
     useEffect(() => {

@@ -3,8 +3,7 @@ import arrowNext from 'assets/ic-right-arrow.svg';
 import {Button, EButtonTheme} from 'Components/Common/Button/Button';
 import styles from 'Components/Pagination/Pagination.module.css';
 import {PER_PAGE} from 'Const';
-import {UseAppDispatch} from 'Store/hooks';
-import {changePage} from 'Store/Slices/productList/ProductListSlice';
+import {useActions} from 'hooks/hooks';
 
 interface IPaginationProps {
     currentPage: number;
@@ -21,24 +20,24 @@ enum EArrow {
 }
 
 export const Pagination = ({currentPage, total}: IPaginationProps) => {
-    const dispatch = UseAppDispatch();
+    const {changePage} = useActions();
 
     const lastIndexPage = Math.floor(total / PER_PAGE);
 
     const handlePrevPage = () => {
-        dispatch(changePage(currentPage - 1));
+        changePage(currentPage - 1);
     };
 
     const handleNextPage = () => {
-        dispatch(changePage(currentPage + 1));
+        changePage(currentPage + 1);
     };
 
     const handleDotsPage = () => {
-        dispatch(changePage(currentPage < lastIndexPage - MIDDLE_INDEX_PAGE ? currentPage + 1 : currentPage - 1));
+        changePage(currentPage < lastIndexPage - MIDDLE_INDEX_PAGE ? currentPage + 1 : currentPage - 1);
     };
 
     const handlePageItemsClick = (page: number) => {
-        dispatch(changePage(page));
+        changePage(page);
     };
 
     const renderArrowButton = (arrow: EArrow) => {

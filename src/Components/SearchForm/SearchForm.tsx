@@ -1,20 +1,19 @@
 import searchIcon from 'assets/ic-close-input.svg';
 import {IconButton} from 'Components/Common/IconButton/IconButton';
 import styles from 'Components/SearchForm/SearchForm.module.css';
+import {useActions} from 'hooks/hooks';
 import {useSearchForm} from 'hooks/useSearchForm';
 import {FormEvent} from 'react';
-import {UseAppDispatch} from 'Store/hooks';
-import {searchProducts} from 'Store/Slices/productList/ProductListSlice';
 
 export const SEARCH_PARAMS_KEY = 'query';
 
 export const SearchForm = () => {
     const [search, setSearch] = useSearchForm();
 
-    const dispatch = UseAppDispatch();
+    const {searchProducts} = useActions();
 
     const handleSubmit = (event: FormEvent) => {
-        dispatch(searchProducts(search));
+        searchProducts(search);
         event.preventDefault();
     };
 

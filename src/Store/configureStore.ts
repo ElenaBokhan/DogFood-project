@@ -5,7 +5,9 @@ import ProductSlice from 'Store/Slices/product/ProductSlice';
 import ProductsListSlice from 'Store/Slices/productList/ProductListSlice';
 import UserProfileSlice from 'Store/Slices/userProfile/UserProfileSlice';
 import LoadingSlice from 'Store/Slices/loading/Loading';
+import CartSlice from 'Store/Slices/cart/CartSlice';
 import AuthSlice from 'Store/Slices/Auth/AuthSlice';
+import FavouritesSlice from 'Store/Slices/favourites/FavouritesSlice';
 import {productListApi} from 'Store/Api/productListApi';
 
 const rootReducer = combineReducers({
@@ -14,6 +16,8 @@ const rootReducer = combineReducers({
     [ProductSlice.name]: ProductSlice.reducer,
     [AuthSlice.name]: AuthSlice.reducer,
     [LoadingSlice.name]: LoadingSlice.reducer,
+    [CartSlice.name]: CartSlice.reducer,
+    [FavouritesSlice.name]: FavouritesSlice.reducer,
     [authApi.reducerPath]: authApi.reducer,
     [productListApi.reducerPath]: productListApi.reducer,
 });
