@@ -1,0 +1,29 @@
+.field {
+    font-size: 16px;
+    border-radius: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.field-textarea {
+    height: 20px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1px solid #CFD8DC;
+}
+
+.field {
+    display: flex;
+    gap: 40px;
+    margin: 40px 0;
+}
+
+.field span {
+    text-align: right;
+    width: 30%;
+}
+
+.field input {
+    width: 70%;
+}

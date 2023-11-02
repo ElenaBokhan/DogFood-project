@@ -19,11 +19,9 @@ export const Cart = () => {
         );
 
         return (
-            <div className={styles.cartSizeText}>
-                <Text type={ETextType.H1} weight={EFontWeight.SECONDARY}>
-                    {text}
-                </Text>
-            </div>
+            <Text type={ETextType.H1} weight={EFontWeight.SECONDARY}>
+                {text}
+            </Text>
         );
     };
 
