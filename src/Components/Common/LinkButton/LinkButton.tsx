@@ -4,10 +4,11 @@ import {Link} from 'react-router-dom';
 interface ILinkButtonProps {
     label: string;
     path: string;
+    state?: IProduct;
 }
 
-export const LinkButton = ({path, label}: ILinkButtonProps) => (
-    <Link to={path}>
+export const LinkButton = ({path, label, state}: ILinkButtonProps) => (
+    <Link state={state} to={path}>
         <Button label={label} theme={EButtonTheme.REDIRECT} />
     </Link>
 );

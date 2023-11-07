@@ -6,7 +6,7 @@ import ProductsListSlice from 'Store/Slices/productList/ProductListSlice';
 import UserProfileSlice from 'Store/Slices/userProfile/UserProfileSlice';
 import LoadingSlice from 'Store/Slices/loading/Loading';
 import CartSlice from 'Store/Slices/cart/CartSlice';
-import AuthSlice from 'Store/Slices/Auth/AuthSlice';
+import AuthSlice from 'Store/Slices/auth/AuthSlice';
 import FavouritesSlice from 'Store/Slices/favourites/FavouritesSlice';
 import {productListApi} from 'Store/Api/productListApi';
 

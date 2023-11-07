@@ -1,0 +1,25 @@
+.add-review-page {
+padding: 0 120px;
+}
+
+.review-textarea {
+    height: 88px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1px solid #CFD8DC;
+}
+
+.field {
+    display: flex;
+    gap: 40px;
+    margin: 40px 0;
+}
+
+.field span {
+    width: 30%;
+}
+
+.field input {
+    width: 70%;
+}
+

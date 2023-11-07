@@ -32,8 +32,21 @@ declare global {
         _id: string;
     }
 
+    interface INewProduct {
+        author?: IUser;
+        name: string;
+        price: number;
+        discount: number;
+        wight: string;
+        description: string;
+        available?: boolean;
+        stock?: number;
+        pictures: string;
+        tags?: string[];
+    }
+
     interface IReview {
-        _id: string;
+        _id?: string;
         text: string;
         author?: IUser;
         product?: string;

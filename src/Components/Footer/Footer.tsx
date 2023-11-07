@@ -8,11 +8,12 @@ import FooterContainer, {EContainerType} from 'Components/Common/Container/Conta
 import {IconButton} from 'Components/Common/IconButton/IconButton';
 import {EFontWeight, ETextType, Text} from 'Components/Common/Text/Text';
 import styles from 'Components/Footer/Footer.module.css';
+import {ETestId} from 'Enum';
 
 export const Footer = () => {
     const renderFooterLogo = () => (
         <div className={styles.logoBlock}>
-            <img alt="logo" src={Logo} />
+            <img data-testid={ETestId.FOOTER_MAIN_LOGO} alt="logo" src={Logo} />
             <Text type={ETextType.S2} value={'© «Интернет-магазин DogFood.ru»'} />
         </div>
     );
@@ -25,7 +26,7 @@ export const Footer = () => {
             <>
                 {menu.map((column, index) => {
                     return (
-                        <ul key={index}>
+                        <ul data-testid={ETestId.FOOTER_MENU} key={index}>
                             {column.map((menuItem) => {
                                 return (
                                     <li key={menuItem}>
@@ -41,7 +42,7 @@ export const Footer = () => {
     };
 
     const renderContactsGroup = () => (
-        <div className={styles.contacts}>
+        <div data-testid={ETestId.FOOTER_CONTACTS} className={styles.contacts}>
             <Text value={'Мы на связи'} weight={EFontWeight.GENERAL} />
             <Text value={'8 (999) 00-00-00'} />
             <Text type={ETextType.S1} value={'dogfood.ru@gmail.com'} />

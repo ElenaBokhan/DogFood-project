@@ -49,7 +49,29 @@ export const productListApi = createApi({
             }),
             invalidatesTags: [{type: PRODUCTS_TAG, id: 'LIST'}],
         }),
+        addProduct: builder.mutation<IProduct, INewProduct>({
+            query: (product) => ({
+                url: '/products',
+                method: 'POST',
+                body: product,
+            }),
+            invalidatesTags: [{type: PRODUCTS_TAG, id: 'LIST'}],
+        }),
+        addRewiew: builder.mutation<IProduct, {productId: string; review: IReview}>({
+            query: ({productId, review}) => ({
+                url: `/products/review/${productId}`,
+                method: 'POST',
+                body: review,
+            }),
+            invalidatesTags: [{type: PRODUCTS_TAG, id: 'LIST'}],
+        }),
     }),
 });
 
-export const {useProductListQuery, useProductQuery, useToggleLikeProductMutation} = productListApi;
+export const {
+    useAddProductMutation,
+    useProductListQuery,
+    useProductQuery,
+    useToggleLikeProductMutation,
+    useAddRewiewMutation,
+} = productListApi;

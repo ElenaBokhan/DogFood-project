@@ -3,6 +3,7 @@ import favouritesIcon from 'assets/ic-favorites.svg';
 import searchIcon from 'assets/ic-search.svg';
 import {Button, EButtonTheme} from 'Components/Common/Button/Button';
 import {IconButton} from 'Components/Common/IconButton/IconButton';
+import {LinkButton} from 'Components/Common/LinkButton/LinkButton';
 import {Price} from 'Components/Common/Price/Price';
 import {EFontColor, ETextType, Text} from 'Components/Common/Text/Text';
 import {TitlePage} from 'Components/Common/TitlePage/TitlePage';
@@ -87,6 +88,7 @@ export const ProductCard = () => {
     const renderReviews = () => (
         <>
             <Text type={ETextType.H3} value={'Отзывы'} />
+            <LinkButton path="/addReview" label={'Написать отзыв'} state={data} />
             {reviews.map((review) => (
                 <Review key={review._id} review={review} />
             ))}

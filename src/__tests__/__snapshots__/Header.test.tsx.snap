@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Тесты для компонента Header Снапшот компонента Header Snapshot 1`] = `
+<DocumentFragment>
+  <header
+    class="headerContainer"
+  >
+    <div
+      class="container header"
+    >
+      <img
+        alt="logoMain"
+        data-testid="headerMainLogo"
+        height="56"
+        src="[object Object]"
+        width="224"
+      />
+      <div
+        class="searchForm"
+      >
+        <form>
+          <input
+            data-testid="headerSearchInput"
+            placeholder="Поиск товаров"
+            value=""
+          />
+        </form>
+        <button
+          class="button"
+          type="button"
+        >
+          <img
+            alt="searchButton"
+            src="[object Object]"
+          />
+        </button>
+      </div>
+      <div
+        class="profilesIcons"
+      >
+        <div
+          class="profilesIcon"
+        >
+          <button
+            class="button"
+            type="button"
+          >
+            <img
+              alt="headerIcon"
+              data-testid="headerFavouritesIcon"
+              src="[object Object]"
+            />
+          </button>
+        </div>
+        <div
+          class="profilesIcon"
+        >
+          <button
+            class="button"
+            type="button"
+          >
+            <img
+              alt="headerIcon"
+              data-testid="headerCartIcon"
+              src="[object Object]"
+            />
+          </button>
+        </div>
+        <div
+          class="profilesIcon"
+        >
+          <button
+            class="button"
+            type="button"
+          >
+            <img
+              alt="headerIcon"
+              data-testid="headerProfileIcon"
+              src="[object Object]"
+            />
+          </button>
+        </div>
+        <div
+          class="profilesIcon"
+        >
+          <button
+            class="button"
+            type="button"
+          >
+            <img
+              alt="headerIcon"
+              data-testid="headerAddNewProduct"
+              src="[object Object]"
+            />
+          </button>
+        </div>
+        <div
+          class="profilesIcon"
+        >
+          <button
+            class="button"
+            type="button"
+          >
+            <img
+              alt="headerIcon"
+              data-testid="headerLogOutIcon"
+              src="[object Object]"
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+</DocumentFragment>
+`;

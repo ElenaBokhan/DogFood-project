@@ -1,0 +1,161 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Тесты для компонента Footer Снапшот футера Snapshot 1`] = `
+<DocumentFragment>
+  <footer
+    class="footerContainer"
+  >
+    <div
+      class="container footer"
+    >
+      <div
+        class="logoBlock"
+      >
+        <img
+          alt="logo"
+          data-testid="footerMainLogo"
+          src="[object Object]"
+        />
+        <span
+          class="black undefined subscribe2"
+        >
+          © «Интернет-магазин DogFood.ru»
+        </span>
+      </div>
+      <ul
+        data-testid="footerMenu"
+      >
+        <li>
+          <span
+            class="black undefined paragraph2"
+          >
+            Каталог
+          </span>
+        </li>
+        <li>
+          <span
+            class="black undefined paragraph2"
+          >
+            Акции
+          </span>
+        </li>
+        <li>
+          <span
+            class="black undefined paragraph2"
+          >
+            Новости
+          </span>
+        </li>
+        <li>
+          <span
+            class="black undefined paragraph2"
+          >
+            Отзывы
+          </span>
+        </li>
+      </ul>
+      <ul
+        data-testid="footerMenu"
+      >
+        <li>
+          <span
+            class="black undefined paragraph2"
+          >
+            Оплата и доставка
+          </span>
+        </li>
+        <li>
+          <span
+            class="black undefined paragraph2"
+          >
+            Часто спрашивают
+          </span>
+        </li>
+        <li>
+          <span
+            class="black undefined paragraph2"
+          >
+            Обратная связь
+          </span>
+        </li>
+        <li>
+          <span
+            class="black undefined paragraph2"
+          >
+            Контакты
+          </span>
+        </li>
+      </ul>
+      <div
+        class="contacts"
+        data-testid="footerContacts"
+      >
+        <span
+          class="black bold paragraph1"
+        >
+          Мы на связи
+        </span>
+        <span
+          class="black undefined paragraph1"
+        >
+          8 (999) 00-00-00
+        </span>
+        <span
+          class="black undefined subscribe1"
+        >
+          dogfood.ru@gmail.com
+        </span>
+        <div
+          class="social"
+        >
+          <button
+            class="button"
+            type="button"
+          >
+            <img
+              alt="telegramLogo"
+              src="[object Object]"
+            />
+          </button>
+          <button
+            class="button"
+            type="button"
+          >
+            <img
+              alt="whatsappLogo"
+              src="[object Object]"
+            />
+          </button>
+          <button
+            class="button"
+            type="button"
+          >
+            <img
+              alt="viberLogo"
+              src="[object Object]"
+            />
+          </button>
+          <button
+            class="button"
+            type="button"
+          >
+            <img
+              alt="instagramLogo"
+              src="[object Object]"
+            />
+          </button>
+          <button
+            class="button"
+            type="button"
+          >
+            <img
+              alt="vkLogo"
+              src="[object Object]"
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+  </footer>
+</DocumentFragment>
+`;

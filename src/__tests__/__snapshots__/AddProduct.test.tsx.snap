@@ -1,0 +1,157 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Тесты для компонента addProduct Снапшот компонента AddProduct Snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="addReviewPage"
+  >
+    <div>
+      <a
+        class="breadcrumbs"
+        href="/"
+      >
+        <img
+          alt="arrow"
+          src="[object Object]"
+        />
+        <span
+          class="grey undefined subscribe2"
+        >
+          Назад
+        </span>
+      </a>
+      <span
+        class="black undefined head1"
+      >
+        Добавление нового товара
+      </span>
+    </div>
+    <div
+      style="height: 40px;"
+    />
+    <hr />
+    <form>
+      <div
+        class="field"
+      >
+        <span
+          class="black undefined paragraph1"
+        >
+          Название товара
+        </span>
+        <input
+          class="fieldTextarea"
+          data-testid="addProductNameInput"
+          placeholder="Укажите значение"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        class="field"
+      >
+        <span
+          class="black undefined paragraph1"
+        >
+          Цена товара
+        </span>
+        <input
+          class="fieldTextarea"
+          data-testid="addProductPriceInput"
+          placeholder="Укажите значение"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        class="field"
+      >
+        <span
+          class="black undefined paragraph1"
+        >
+          Описание
+        </span>
+        <input
+          class="fieldTextarea"
+          data-testid="addProductDescriptionInput"
+          placeholder="Укажите значение"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        class="field"
+      >
+        <span
+          class="black undefined paragraph1"
+        >
+          Скидка
+        </span>
+        <input
+          class="fieldTextarea"
+          data-testid="addProductDiscountInput"
+          placeholder="Укажите значение"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        class="field"
+      >
+        <span
+          class="black undefined paragraph1"
+        >
+          Наличие
+        </span>
+        <input
+          class="fieldTextarea"
+          data-testid="addProductStockInput"
+          placeholder="Укажите значение"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        class="field"
+      >
+        <span
+          class="black undefined paragraph1"
+        >
+          Вес
+        </span>
+        <input
+          class="fieldTextarea"
+          data-testid="addProductWightInput"
+          placeholder="Укажите значение"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        class="field"
+      >
+        <span
+          class="black undefined paragraph1"
+        >
+          Добавьте фото
+        </span>
+        <input
+          class="fieldTextarea"
+          data-testid="addProductPicturesInput"
+          placeholder="Укажите значение"
+          type="text"
+          value=""
+        />
+      </div>
+      <button
+        class="button standard undefined"
+        data-testid="addProductSubmitButton"
+        data-value="Добавить продукт"
+        type="submit"
+      >
+        Добавить продукт
+      </button>
+    </form>
+  </div>
+</DocumentFragment>
+`;

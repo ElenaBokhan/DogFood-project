@@ -17,9 +17,11 @@
     gap: 5px;
     cursor: pointer;
 }
+
 .productImage {
     position: relative;
 }
+
 .discount {
     position: absolute;
     display: inline-flex;

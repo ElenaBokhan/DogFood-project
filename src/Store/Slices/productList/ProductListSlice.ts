@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction, SerializedError} from '@reduxjs/toolkit';
 import {isActionPending, isActionRejected} from 'Utils/reduxUtils';
-import {getDefaultFilter} from 'Utils/utils';
+import {PER_PAGE} from 'Const';
 
 export enum ESortFilter {
     POPULAR = 'Популярные',
@@ -29,7 +29,7 @@ interface IProductsListState {
 const initialState: IProductsListState = {
     data: {
         productList: null,
-        clientFilter: getDefaultFilter(),
+        clientFilter: {search: '', page: 1, perPage: PER_PAGE},
         sortFilter: ESortFilter.POPULAR,
     },
     isLoading: false,
