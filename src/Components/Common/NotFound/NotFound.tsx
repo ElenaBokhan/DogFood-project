@@ -2,6 +2,7 @@ import searchNotFound from 'assets/ic-notfound.svg';
 import {LinkButton} from 'Components/Common/LinkButton/LinkButton';
 import styles from 'Components/Common/NotFound/NotFound.module.css';
 import {EFontWeight, ETextType, Text} from 'Components/Common/Text/Text';
+import {ETestId} from 'Enum';
 import {useLocation} from 'react-router-dom';
 
 enum ENotFoundPlacement {
@@ -37,7 +38,7 @@ export const NotFound = () => {
     };
 
     return (
-        <div className={styles.notFound}>
+        <div data-testid={ETestId.NOT_FOUND} className={styles.notFound}>
             <img alt="searchNotFound" src={searchNotFound} />
             {renderTitle()}
             <LinkButton label={'На главную'} path={'/'} />

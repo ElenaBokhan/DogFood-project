@@ -12,6 +12,7 @@ import {TFormSignInData} from 'Components/Forms/Helpers/types';
 import {useLocation, useNavigate} from 'react-router-dom';
 import {objectHasProperty} from 'Utils/utils';
 import {useActions} from 'hooks/hooks';
+import {ETestId} from 'Enum';
 
 export const SignInForm = () => {
     const [signInRequest] = useSignInMutation();
@@ -45,6 +46,7 @@ export const SignInForm = () => {
                 disable={isSubmitting || (isSubmitted && (!isValid || isSubmitting))}
                 label={'Войти'}
                 type={'submit'}
+                testId={ETestId.SIGN_FORM_SUBMIT_BUTTON}
             />
             <Button
                 theme={EButtonTheme.REDIRECT}
@@ -72,8 +74,13 @@ export const SignInForm = () => {
             <div className={styles.modalContainer}>
                 <Text type={ETextType.H2} value={'Вход'} />
                 <div className={styles.inputsContainer}>
-                    <Input errors={errors} label={'email'} register={register} />
-                    <Input errors={errors} label={'password'} register={register} />
+                    <Input testId={ETestId.SIGN_FORM_EMAIL_INPUT} errors={errors} label={'email'} register={register} />
+                    <Input
+                        testId={ETestId.SIGN_FORM_PASSWORD_INPUT}
+                        errors={errors}
+                        label={'password'}
+                        register={register}
+                    />
                 </div>
                 {renderButtonsControl()}
             </div>

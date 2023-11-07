@@ -3,17 +3,24 @@ import phoneIcon from 'assets/ic-phone.svg';
 import {Button, EButtonTheme} from 'Components/Common/Button/Button';
 import {EFontColor, ETextType, Text} from 'Components/Common/Text/Text';
 import {TitlePage} from 'Components/Common/TitlePage/TitlePage';
+import {UpdateUserForm} from 'Components/Forms/UpdateUserForm/UpdateUserForm';
 import styles from 'Pages/Profile/Profile.module.css';
+import {useCallback, useState} from 'react';
 import {UseAppSelector} from 'Store/hooks';
 import {selectUser} from 'Store/Slices/userProfile/UserProfileSelectors';
 
 export const Profile = () => {
     const {name, email} = UseAppSelector(selectUser);
+    const [showUpdateUserForm, setShowUpdateUserForm] = useState(false);
+
+    const handleToggleShowUpdateUserForm = useCallback(() => {
+        setShowUpdateUserForm(!showUpdateUserForm);
+    }, [showUpdateUserForm]);
 
     const renderButtonBlock = () => {
         return (
             <div className={styles.buttons}>
-                <Button label={'Изменить'} theme={EButtonTheme.REDIRECT} />
+                <Button onChange={handleToggleShowUpdateUserForm} label={'Изменить'} theme={EButtonTheme.REDIRECT} />
                 <Button label={'Выйти'} theme={EButtonTheme.REDIRECT} />
             </div>
         );
@@ -35,7 +42,9 @@ export const Profile = () => {
         );
     };
 
-    return (
+    return showUpdateUserForm ? (
+        <UpdateUserForm onCloseForm={handleToggleShowUpdateUserForm} />
+    ) : (
         <div className={styles.profile}>
             <TitlePage label={'Профиль'} />
             {renderBody()}

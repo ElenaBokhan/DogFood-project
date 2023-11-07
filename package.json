@@ -28,6 +28,7 @@
 		"cross-env": "^7.0.3",
 		"css-loader": "^6.8.1",
 		"cssnano": "^6.0.1",
+		"cypress": "13.4.0",
 		"cz-conventional-changelog": "^3.3.0",
 		"eslint": "^8.42.0",
 		"eslint-config-prettier": "^8.8.0",
@@ -73,8 +74,12 @@
 		"pre-commit": "yarn stylelint:fix && yarn lint && yarn format",
 		"prepare": "husky install",
 		"commit": "yarn pre-commit && cz",
-		"test": "jest",
-		"test:watch": "jest --watch"
+		"test": "jest --config=\"./jest/jest.config.ts\"",
+		"test:watch": "jest --config=\"./jest/jest.config.ts\" --watch",
+		"test: e2e": "./scripts/run-e2e.sh",
+		"cy:run:headed": "cypress run --headed --config-file=\"./cypress/cypress.config.ts\"",
+		"cy:run": "cypress run --config-file=\"./cypress/cypress.config.ts\"",
+		"cy:open": "cypress open --config-file=\"./cypress/cypress.config.ts\" "
 	},
 	"dependencies": {
 		"@fontsource/nunito": "5.0.8",

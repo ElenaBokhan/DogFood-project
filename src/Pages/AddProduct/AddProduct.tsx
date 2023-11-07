@@ -29,7 +29,7 @@ export const AddProduct = () => {
         {
             param: 'price',
             label: 'Цена товара',
-            value: '',
+            value: null,
             testId: ETestId.ADD_PRODUCT_PRICE_INPUT,
         },
         {
@@ -41,13 +41,13 @@ export const AddProduct = () => {
         {
             param: 'discount',
             label: 'Скидка',
-            value: '',
+            value: null,
             testId: ETestId.ADD_PRODUCT_DISCOUNT_INPUT,
         },
         {
             param: 'stock',
             label: 'Наличие',
-            value: '',
+            value: null,
             testId: ETestId.ADD_PRODUCT_STOCK_INPUT,
         },
         {

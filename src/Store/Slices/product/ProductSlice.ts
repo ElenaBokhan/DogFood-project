@@ -1,16 +1,8 @@
 import {createSlice} from '@reduxjs/toolkit';
 import type {SerializedError} from '@reduxjs/toolkit';
-import {createAppAsyncThunk} from 'Store/hooks';
 import {isActionPending, isActionRejected} from 'Utils/reduxUtils';
 
 export const PRODUCT_SLICE_NAME = 'product';
-
-export const addReview = createAppAsyncThunk<IReview, string>(
-    `${PRODUCT_SLICE_NAME}/addReview`,
-    async (productId: string, {extra: api}) => {
-        return await api.addReview(productId);
-    }
-);
 
 interface IProductState {
     data: IProduct | null;

@@ -10,11 +10,17 @@ export const productListApi = createApi({
     endpoints: (builder) => ({
         productList: builder.query<IProductsList, IClientFilter>({
             query: ({page, perPage, search}: IClientFilter) => ({
-                url: `/products?page=${page}&limit=${perPage}&query=${search}`,
+                url: '/products',
                 method: 'GET',
+                params: {
+                    page,
+                    limit: perPage,
+                    query: search,
+                },
             }),
             serializeQueryArgs: ({endpointName, queryArgs: {search}}) => {
-                return endpointName + search;
+                // return endpointName + search;
+                return search ? endpointName + 'SearchQuery' : endpointName + search;
             },
             merge: (currentCache, newValue, {arg: {page}}) => {
                 if (page === 1) return;
@@ -42,12 +48,41 @@ export const productListApi = createApi({
                 {type: PRODUCTS_TAG, id: 'LIST'},
             ],
         }),
-        toggleLikeProduct: builder.mutation<IProduct, {productId: string; isLiked: boolean}>({
+        toggleLikeProduct: builder.mutation<IProduct, {productId: string; isLiked: boolean; userId: string}>({
             query: ({productId, isLiked}) => ({
                 url: `/products/likes/${productId}`,
                 method: isLiked ? 'DELETE' : 'PUT',
             }),
-            invalidatesTags: [{type: PRODUCTS_TAG, id: 'LIST'}],
+            async onQueryStarted({productId, userId, isLiked}, {dispatch, queryFulfilled, getState}) {
+                const {productList, productListSearchQuery} = getState().productListApi.queries;
+                const productListOriginalArgs = (productListSearchQuery?.originalArgs ||
+                    productList.originalArgs) as IClientFilter;
+
+                const setListLikeResult = dispatch(
+                    productListApi.util.updateQueryData('productList', {...productListOriginalArgs}, (draft) => {
+                        Object.assign(draft, {
+                            ...draft,
+                            products: draft.products.map((product) => {
+                                if (product._id === productId) {
+                                    return {
+                                        ...product,
+                                        likes: isLiked
+                                            ? product.likes.filter((like) => like !== userId)
+                                            : product.likes.concat([userId]),
+                                    };
+                                }
+                                return product;
+                            }),
+                        });
+                    })
+                );
+
+                try {
+                    await queryFulfilled;
+                } catch {
+                    setListLikeResult?.undo();
+                }
+            },
         }),
         addProduct: builder.mutation<IProduct, INewProduct>({
             query: (product) => ({
@@ -74,4 +109,5 @@ export const {
     useProductQuery,
     useToggleLikeProductMutation,
     useAddRewiewMutation,
+    useDeleteProductMutation,
 } = productListApi;
