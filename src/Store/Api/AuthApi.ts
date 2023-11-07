@@ -20,7 +20,14 @@ export const authApi = createApi({
                 body: signInFormData,
             }),
         }),
+        updateUser: builder.mutation<IUser, {name?: string; about?: string; email?: string}>({
+            query: (body) => ({
+                url: '/users/me',
+                method: 'PATCH',
+                body,
+            }),
+        }),
     }),
 });
 
-export const {useSignUpMutation, useSignInMutation} = authApi;
+export const {useSignUpMutation, useSignInMutation, useUpdateUserMutation} = authApi;
