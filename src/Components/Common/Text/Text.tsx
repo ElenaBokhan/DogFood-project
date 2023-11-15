@@ -9,6 +9,7 @@ interface ITextProps {
     weight?: EFontWeight;
     value?: string | number;
     children?: React.ReactNode;
+    testId?: string;
 }
 
 export enum EFontWeight {
@@ -42,8 +43,9 @@ export const Text = ({
     value,
     weight,
     className,
+    testId,
 }: ITextProps) => (
-    <span className={cn(className, styles[fontColor], styles[weight], styles[type])}>
+    <span className={cn(className, styles[fontColor], styles[weight], styles[type])} data-testid={testId}>
         {value}
         {children}
     </span>

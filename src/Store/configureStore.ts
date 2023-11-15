@@ -1,5 +1,4 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
-import api from 'api/api';
 import {authApi} from 'Store/Api/AuthApi';
 import ProductSlice from 'Store/Slices/product/ProductSlice';
 import ProductsListSlice from 'Store/Slices/productList/ProductListSlice';
@@ -26,13 +25,7 @@ const store = configureStore({
     reducer: rootReducer,
     devTools: process.env.NODE_ENV !== 'production',
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({
-            thunk: {
-                extraArgument: api,
-            },
-        })
-            .concat(authApi.middleware)
-            .concat(productListApi.middleware),
+        getDefaultMiddleware().concat(authApi.middleware).concat(productListApi.middleware),
 });
 
 export type TRootState = ReturnType<typeof rootReducer>;

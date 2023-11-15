@@ -11,6 +11,11 @@ export enum ETestId {
     ADD_REVIEW_SUBMIT_BUTTON = 'addReviewSubmitButton',
     ADD_REVIEW_TEXT_INPUT = 'addReviewTextInput',
 
+    ADD_TO_FAVOURITES = 'addToFavouritesButton',
+    REMOVE_FROM_FAVOURITES = 'removeFromFavourites',
+
+    BREADCRUMBS_BUTTON = 'breadcrumbsButton',
+
     FOOTER_MAIN_LOGO = 'footerMainLogo',
     FOOTER_MENU = 'footerMenu',
     FOOTER_CONTACTS = 'footerContacts',
@@ -22,4 +27,16 @@ export enum ETestId {
     HEADER_PROFILE_ICON = 'headerProfileIcon',
     HEADER_LOG_OUT_ICON = 'headerLogOutIcon',
     HEADER_SEARCH_INPUT = 'headerSearchInput',
+
+    SIGN_FORM_EMAIL_INPUT = 'signFormEmailInput',
+    SIGN_FORM_PASSWORD_INPUT = 'signFormPasswordlInput',
+    SIGN_FORM_SUBMIT_BUTTON = 'signFormSubmitButton',
+
+    TITLE_PAGE = 'titlePage',
+    NOT_FOUND = 'notFound',
+
+    PRODUCT_LIKE_BUTTON = 'likeButton',
+    PRODUCT_TRASH_BUTTON = 'trashButton',
+    PRODUCT_NAME = 'productName',
+    PRODUCT_IMAGE = 'productImage',
 }
